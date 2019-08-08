@@ -1,0 +1,343 @@
+/*
+#post-header {
+  background-color: red;
+}
+
+#left-bar {
+  background-color: rgb(200, 200, 200);
+}
+
+#middle-bar {
+  background-color: rgb(100, 100, 200);
+}
+
+#right-bar {
+  background-color: rgb(200, 100, 100);
+}
+*/
+
+#right-bar {
+  font-size: 0.75em;
+}
+
+.container, .container-fluid{
+  //max-width: 100%;
+}
+
+.container-fluid.post-cover{
+  max-width: 75%;
+}
+
+.container-fluid .post-header{
+  max-width: 100%;
+}
+
+.container-fluid .post-header .display-2{
+  padding-bottom: 0px;
+}
+
+
+.shot-showcase {
+  //background-color: rgba(0, 0, 0, 0.420);
+  text-align: center;
+}
+
+.row.shot-showcase {
+  margin-top: 0.42em;
+  //max-width: 75%;
+}
+
+.shot-showcase.tmp {
+  margin-top: 3em;
+  margin-bottom: 1.38em;
+}
+
+.carousel-indicators {
+  top: 0%;
+}
+
+.carousel-control-next {
+  right: -3%;
+}
+
+.carousel-control-prev {
+  left: -3%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: -1em;
+  height: 1em;
+}
+
+.shot-showcase .col-12 {
+  //padding-right: 5%;
+  //padding-left: 5%;
+}
+
+/*
+.shot-showcase .col-12.carousel.slide carousel-inner{
+height: 80vh;
+}
+*/
+
+.juxtapose.col-6 {
+  padding-right: 3%;
+  padding-left: 3%;
+}
+
+.juxtapose.col-6.left-img {
+  padding-right: 2.25px;
+}
+
+.juxtapose.col-6.right-img {
+  padding-left: 2.25px;
+}
+
+.jx-knightlab {
+  opacity: 0;
+}
+
+.table>tbody>tr>td {
+  vertical-align: middle;
+}
+
+.table-condensed {
+  font-size: 0.9em;
+}
+
+#dataset-summary {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+
+
+.table#dataset-summary .text-right{
+  padding-right: 3%;
+}
+
+.table#dataset-summary .text-left{
+  padding-left: 0%;
+}
+
+
+
+.table a{
+  color: black;
+  font-weight: 600;
+  border-bottom: 0.02px solid red;
+}
+
+/*
+.carousel-caption-right,
+.carousel-caption-left {
+    display: none;
+}
+
+.col-12.carousel.slide:hover .carousel-caption-left {
+    display: block;
+}
+
+.col-12.carousel.slide:hover .carousel-caption-right {
+    display: block;
+}
+*/
+
+.carousel-caption-right, .carousel-caption-left{
+  opacity:0;
+  transition:200ms ease-in-out;
+}
+
+.shot-showcase .carousel.slide:hover .carousel-caption-right{
+  opacity:1;
+}
+
+.shot-showcase .carousel.slide:hover .carousel-caption-left{
+  opacity:0;
+}
+
+
+.carousel-caption-right,
+.carousel-caption-left {
+  position: absolute;
+  bottom: 0px;
+  z-index: 10;
+  padding-bottom: 0%;
+  color: #fff;
+  font-size: 1em;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 3%;
+  padding-right: 3%;
+  padding-left: 3%;
+  padding-top: 1%;
+}
+
+.carousel-caption-right {
+  right: 0%;
+  text-align: right;
+}
+
+.carousel-caption-left {
+  left: 0%;
+  text-align: left;
+}
+
+
+.training-summary .table td{
+  padding: 0.4rem;
+}
+
+.training-summary .table {
+  font-size: 0.8em;
+}
+
+.training-summary .col-3#right-bar {
+  padding-right: 10%;
+}
+
+
+.row.post-content.heatmap #right-bar{
+  font-size: 1em;
+}
+
+.row.post-content.heatmap {
+  padding-top: -15px;
+}
+
+.heatmap .carousel {
+  padding-top: 7%;
+}
+
+
+
+.heatmap {
+  padding-top: 0%;
+}
+
+
+.heatmap .carousel-indicators li{
+  background-color: black;
+  margin-top: 0%;
+}
+
+#results-heatmaps-buttons .btn-primary {
+  background-color: rgba(231, 25, 25, 1);
+  border-color: #fff;
+
+  //color: black;
+
+  background-color: #343A40;
+  border-color: #605d5d;
+
+
+}
+
+#heatmap-caption #middle-bar p {
+  font-size: 12px;
+  text-align: center;
+}
+
+#results-heatmaps-buttons #left-bar p {
+  font-size: 12px;
+  text-align: right;
+}
+
+.heatmap .carousel {
+  padding-top: 2.5%;
+}
+
+#results-conf-mat #middle-bar img {
+  padding-top: 3%;
+}
+
+.heatmap #right-bar p{
+  font-size: 0.75em;
+}
+
+.heatmap #left-bar h6 {
+  text-align: right;
+}
+
+.embed-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  height: auto;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#tdk-bank-analysis {
+  text-align: center;
+  font-size: 12px;
+}
+
+.col-5.video-embed {
+  padding-right: 1px;
+  padding-left: 0%;
+  margin-right: 0%;
+  margin-left: 0%;
+}
+
+.row#style-tf-imgs .col-3{
+  text-align: center;
+  font-size: 12px;
+}
+
+.row#style-tf-imgs .col-3 img{
+  max-width: 100%;
+}
+
+.shot-showcase #right-bar {
+  text-align: left;
+}
+
+.shot-showcase #left-bar {
+  text-align: right;
+}
+
+#results-perf #left-bar {
+  font-size: 12px;
+  text-align: right;
+  padding-left: 5%;
+}
+
+.methodology #right-bar {
+  padding-left: 5%;
+}
+
+.text-standout {
+  //color: #d12f52;
+  color: #333333;
+  font-weight: 700;
+}
+
+.text-standout a {
+  font-weight: 725!important;
+}
+
+.nn-101-writeup .col-3 {
+  padding-left: 5%;
+  padding-right: 0%;
+}
+
+.nn-101-writeup a {
+  font-weight: 500;
+  color: #243aab;
+}
+
+@font-face {
+  font-family: 'Adobe Caslon Pro';
+  src: url(assets/fonts/ACaslonPro-Regular.otf)
+}

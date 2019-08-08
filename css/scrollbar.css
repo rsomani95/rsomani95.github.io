@@ -1,0 +1,21 @@
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment  {}
+
+::-webkit-scrollbar-track-piece  {
+    display:none;
+}
+
+::-webkit-scrollbar-thumb:vertical
+{
+    background:black url('https://i.imgur.com/hs5XGj0.png') repeat;
+    background-size:15px 29px;
+    background-position:;
+    display: block;
+    width: 15px;
+    height: 117px;
+    //overflow-y: scroll;
+}
