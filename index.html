@@ -1,0 +1,3089 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+  <link rel='stylesheet' href='css/main.css'>
+  <link rel='stylesheet' href='css/bootstrap-toc.css'>
+  <link rel='stylesheet' href='css/links.css'>
+  <!-- Optional Film Strip Scrollbar
+  <link rel='stylesheet' href='css/scrollbar.css'>
+  -->
+  <!-- Need to experiment with unminified version
+  <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+  -->
+
+
+  <title>AI For Filmmaking</title>
+</head>
+
+<body>
+
+  <div class='container-fluid post-cover'>
+    <div class="juxtapose col-12">
+      <img src="assets/img/cover/cover-after-revised.png" />
+      <img src="assets/img/cover/cover-before.png" />
+    </div>
+    <div class='row' id='post-header'>
+      <h1 class='col-12 display-2 text-center'>
+        AI For Filmmaking
+      </h1>
+      <h2 class='col-12 display-4 text-center'>
+        Recognising Shot Types with ResNets
+      </h2>
+      <br>
+      <h5 class='col-12 text-center'>
+        Rahul Somani, 6th August 2019
+      </h5>
+      <br>
+      <br>
+      <br>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class='container post-header'>
+
+    <div class='row post-content'>
+
+      <div class='col-3 toc-wrapper' id='left-bar'>
+        <h4>Contents</h4>
+        <div class="just-padding toc-wrapper">
+
+          <div class="list-group list-group-root well">
+
+            <a href="#intro" class="list-group-item">
+              Introduction
+            </a>
+
+            <a href="#nn101" class="list-group-item">
+              Neural Networks 101
+            </a>
+
+            <a href="#dataset-overview-toggle" class="list-group-item" data-toggle="collapse">
+              Dataset
+            </a>
+            <div class="list-group collapse" id="dataset-overview-toggle">
+
+              <a href="#data-intro" class="list-group-item">
+                Introduction
+              </a>
+
+              <a href="#data-sources" class="list-group-item">
+                Sources
+              </a>
+
+              <a href="#shot-classes-toggle" class="list-group-item" data-toggle="collapse">
+                Shot Types
+              </a>
+              <div class="list-group collapse" id="shot-classes-toggle">
+                <a href="#data-ews" class="list-group-item">Extreme Wide Shot</a>
+                <a href="#data-ls" class="list-group-item">Long Shot</a>
+                <a href="#data-ms" class="list-group-item">Medium Shot</a>
+                <a href="#data-mcu" class="list-group-item">Medium Close Up</a>
+                <a href="#data-cu" class="list-group-item">Close Up</a>
+                <a href="#data-ecu" class="list-group-item">Extreme Close Up</a>
+              </div>
+
+              <a href="#item-2-2" class="list-group-item" data-toggle="collapse">
+                More Shot Types
+              </a>
+              <div class="list-group collapse" id="item-2-2">
+                <a href="#data-fut-ws" class="list-group-item">Wide Shot</a>
+                <a href="#data-fut-mls" class="list-group-item">Medium Long Shot</a>
+              </div>
+
+            </div>
+
+            <a href="#method" class="list-group-item">
+              Methodology
+            </a>
+
+            <!--
+            <a href="#method-toggle" class="list-group-item" data-toggle="collapse">
+              Methodology
+            </a>
+            <div class="list-group collapse" id="method-toggle">
+
+              <a href="#method-training" class="list-group-item" data-toggle="collapse">
+                Training Process</a>
+
+              <a href="#method-cyc-tl" class="list-group-item" data-toggle="collapse">
+                Cyclical Transfer Learning</a>
+            </div>
+            -->
+
+
+            <a href="#results-toggle" class="list-group-item" data-toggle="collapse">
+              Results
+            </a>
+            <div class="list-group collapse" id="results-toggle">
+
+              <a href="#results-perf" class="list-group-item">
+                Training Performance </a>
+              <a href="#results-conf-mat" class="list-group-item">
+                Confusion Matrix </a>
+              <a href="#results-heatmaps" class="list-group-item">
+                Heatmaps </a>
+            </div>
+
+            <!--
+            <a href="#bigpic-toggle" class="list-group-item" data-toggle="collapse">
+              The Bigger Picture
+            </a>
+            <div class="list-group collapse" id="bigpic-toggle">
+
+              <a href="#bigpic-" class="list-group-item" data-toggle="collapse">
+                Item 3.1</a>
+              <a href="#bigpic-" class="list-group-item" data-toggle="collapse">
+                Item 3.2</a>
+              <a href="#bigpic-" class="list-group-item" data-toggle="collapse">
+                Item 3.3</a>
+            </div>
+           -->
+
+            <a href="#bigpic" class="list-group-item">
+              The Bigger Picture
+            </a>
+
+            <a href="#ref-toggle" class="list-group-item" data-toggle="collapse">
+              References
+            </a>
+            <div class="list-group collapse" id="ref-toggle">
+
+              <a href="#ref-" class="list-group-item" data-toggle="collapse">
+                Technical</a>
+              <a href="#ref-" class="list-group-item" data-toggle="collapse">
+                Previous Work</a>
+              <a href="#ref-" class="list-group-item" data-toggle="collapse">
+                Etc</a>
+            </div>
+
+
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class='col-9 test'>
+        <div class='row intro-writeup'>
+          <div class='col-8' id='middle-bar'>
+            <h3 id='intro' data-toggle='collapse' href='#intro-toggle'
+                class='text-center'>
+              Introduction
+            </h3>
+            <br>
+            <p>
+              Visual language is the kernel of cinema.
+              Good cinema and effective visual language are
+              mutually inclusive. Cinematography is an intricate
+              art that consists of multiple elements such as shot
+              size, camera angles, camera movement, lighting,
+              character movement, etc. and how all these elements
+              tie together to tell a compelling visual story.
+            </p>
+            <p>
+              You develop your visual grammar by watching a lot
+              a lot of films, breaking them
+              down to their simplest elements and assessing what
+              makes them effective. <i>This can be an arduous process.</i>
+              <a href='https://www.youtube.com/watch?v=E679XJellLs' class="r-link ai-element ai-element_type2 ai-element3">
+                <span class="ai-element__label">This</span>
+              </a>
+              ~5 min sequence alone has about 92 shots!
+            </p>
+
+            <p class='text-standout'>
+              This is where neural networks offer ample promise. I developed
+              a neural network that focuses on
+              one fundamental element of visual grammar:
+              <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
+                <span class="ai-element__label">shot types</span>
+              </a>.
+              It's capable of recognising 6 unique shot types, and is
+              <i>~91% accurate</i>. The model, validation set, code used to
+              train the network, and some more useful material is available on
+              <a href='https://github.com/rsomani95/shot-type-classifier/' class="r-link ai-element ai-element_type2 ai-element3">
+                <span class="ai-element__label">this</span>
+              </a>
+              GitHub repository.
+            </p>
+            <p>
+              To the best of my knowledge, there was
+              <a href='https://www.researchgate.net/publication/230793690_Classifying_cinematographic_shot_types' class="r-link ai-element ai-element_type2 ai-element3">
+                <span class="ai-element__label">an attempt</span>
+              </a> at doing this with neural networks,
+              but the dataset was massive (190,000+ images),
+              private, and the output was restricted to only 3
+              classes. Since the biggest hurdle in tackling this
+              problem was the lack of a dataset, I went through
+              the painstaking process of collecting and manually
+              classifying ~5,700 images.
+            </p>
+          </div>
+          <div class='col-3' id='right-bar'></div>
+        </div>
+
+        <br>
+
+        <div class='row nn-101-writeup'>
+          <div class='col-8' id='middle-bar'>
+            <h3 id='nn101' class='text-center'> Neural Networks 101
+              <small class="text-muted">(for the uninitiated)</small>
+            </h3>
+            <br>
+            <p>
+              "AI" is most often a buzzword for
+              "deep learning", which is the field that deals with using
+              "neural networks" to learn from data.
+              I'll try and summarise the main idea: say you've got
+              some data and want to make sense of it. It could be something
+              structured, like a
+              dataset of customers' purchasing decisions, or
+              something unstructured, like a bunch of images, audio clips
+              medical scans, or video. You may want to predict
+              a customer's desired products, or algorithmically differentiate
+              the image of a dog and a cat, the sound of sea waves and
+              crickets, a video of a goal being scored vs. the goalkeeper
+              saving the day, or whether a tumor is benign or malignant. If
+              this is the case, a neural network is probably the best way
+              to solve the problem.
+            </p>
+            <p>
+              With a large <i>labelled</i> dataset (1000
+              images of dogs and cats stored separately), you could <i>train</i>
+              a neural network to learn patterns from these images. The
+              network puts the image through a pile of computation, and spits
+              out two probabilities: <code>P(cat)</code> and <code>P(dog)</code>.
+              You calculate how wrong the network was using a <code>loss function</code>,
+              then use calculus (chain rule, or more sophisticatedly
+              <code>backpropagation</code>) to manipulate this pile of computation to
+              produce a more correct output. Do this long enough and with a
+              large enough dataset, and you have in your hands an 'AI'
+              solution to your problem.
+            </p>
+            <p>
+              If that piqued your interest, I suggest you watch
+              <a href='https://www.youtube.com/watch?v=aircAruvnKk' class="r-link ai-element ai-element_type2 ai-element3">
+                <span class="ai-element__label">this</span>
+              </a> (~19mins) for a fairly detailed explanation of how
+              a neural network works. If you're bursting with excitement,
+              follow through with
+              <a href='https://course.fast.ai/videos/?lesson=1' class="r-link ai-element ai-element_type2 ai-element3">
+                <span class="ai-element__label">this course</span>
+              </a>.
+            </p>
+          </div>
+          <div class='col-3 align-self-center' id='right-bar'>
+            <p>
+              Of course, this isn't all that deep learning is about.
+              What I've described here is
+              <b>supervised learning</b>
+            </p>
+            <p>
+              There are several other sub-fields of deep learning
+              that are more nuanced and cutting-edge, such as
+              <b>unsupervised learning</b>, <b>reinforcement learning</b>,
+              and <b>generative modelling</b>, to name a few
+            </p>
+
+
+            </p>
+          </div>
+        </div>
+
+        <br>
+
+        <div class='row dataset-writeup'>
+          <div class='col-8' id='middle-bar'>
+            <br>
+            <h3 id='data-intro' class='text-center'>Dataset</h3>
+            <br>
+            <p>
+              The training dataset consists of 5,505 images, split into 6
+              <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
+                <span class="ai-element__label">shot types</span>
+              </a>:
+            </p>
+            <table class="table table-condensed table-sm table-borderless" id='dataset-summary'>
+              <tbody>
+                <tr>
+                  <td class='text-right'><a href='#data-ews' id='stype'>
+                      Extreme Wide Shot</a></td>
+                  <td class='text-left'>⟶ &nbsp;&nbsp;631 images</td>
+                </tr>
+                <tr>
+                  <td class='text-right'><a href='#data-ls' id='stype'>
+                      Long Shot</a></td>
+                  <td class='text-left'>⟶ &nbsp;&nbsp;881 images</td>
+                </tr>
+                <tr>
+                  <td class='text-right'><a href='#data-ms' id='stype'>
+                      Medium Shot</a></td>
+                  <td class='text-left'>⟶ &nbsp;&nbsp;1237 images</td>
+                </tr>
+                <tr>
+                  <td class='text-right'><a href='#data-mcu' id='stype'>
+                      Medium Close Up</a></td>
+                  <td class='text-left'>⟶ &nbsp;&nbsp;945 images</td>
+                </tr>
+                <tr>
+                  <td class='text-right'><a href='#data-cu' id='stype'>
+                      Close Up</a></td>
+                  <td class='text-left'>⟶ &nbsp;&nbsp;1027 images</td>
+                </tr>
+                <tr>
+                  <td class='text-right'><a href='#data-ecu' id='stype'>
+                      Extreme Close Up</a></td>
+                  <td class='text-left'>⟶ &nbsp;&nbsp;784 images</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              In a future version, I will be adding two additional
+              shot types -- <b>Wide Shot</b> and <b>Medium Long Shot</b>.
+            </p>
+            <p>
+              Shot sizes can be subjective to some degree.
+              The key distinction in my dataset from the
+              <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
+                <span class="ai-element__label">linked source</span>
+              </a> is
+              that a <b>Long Shot</b> is an <i>extension of a Full
+                Shot</i> with some leeway for wideness.
+              <a href='https://books.google.co.in/books?id=h8O2pJXpWa0C&lpg=PP1&pg=PA59#v=onepage&q&f=false' class="r-link ai-element ai-element_type2 ai-element3">
+                <span class="ai-element__label">Here</span>
+              </a>
+              is a more thorough definition.
+              This will be made
+              clearer with the examples shown below.
+            </p>
+
+            <h5 id='data-sources'>Data Sources</h5>
+            <ul>
+
+              <li>
+                71 films (30-60 images per film) from the
+                <a href='https://film-grab.com/' class="r-link ai-element ai-element_type2 ai-element3">
+                  <span class="ai-element__label">film-grab</span>
+                </a>
+                database
+              </li>
+
+              <li>
+                700+ films (3-6 images per film) from
+                <a href='https://rarbgprx.org/catalog/movies/' class="r-link ai-element ai-element_type2 ai-element3">
+                  <span class="ai-element__label">RARBG</span>
+                </a>
+              </li>
+
+              <li>
+                298 Extreme Wide Shot images from
+                <a href='https://www.pexels.com/' class="r-link ai-element ai-element_type2 ai-element3">
+                  <span class="ai-element__label">Pexels</span>
+                </a>
+              </li>
+
+              <li>
+                Randomly picked images from relevant google image searches,
+                such as
+                <a href='https://www.google.com/search?tbm=isch&source=hp&biw=1280&bih=649&ei=ysZGXf_XDcTlvgSp5b2wCw&q=wide+shot&oq=wide+shot&gs_l=img.3..0l10.10530.11701..12019...0.0..0.180.1192.6j6......0....1..gws-wiz-img.....0..35i39.mNSpZSKH2pM&ved=0ahUKEwj_5Ky2k-njAhXEso8KHalyD7YQ4dUDCAU&uact=5'
+                  class="r-link ai-element ai-element_type2 ai-element3">
+                  <span class="ai-element__label">this</span>
+                </a>
+              </li>
+
+              <li>
+                552 Extreme Close Ups from Jacob T. Swinney's video essays on
+                <a href='https://vimeo.com/124258143'
+                  class="r-link ai-element ai-element_type2 ai-element3">
+                  <span class="ai-element__label">Tarantino,</span>
+                </a>
+                <a href='https://vimeo.com/233754252'
+                  class="r-link ai-element ai-element_type2 ai-element3">
+                  <span class="ai-element__label">Aronofsky</span>
+                </a> and
+                <a href='https://vimeo.com/152923976'
+                  class="r-link ai-element ai-element_type2 ai-element3">
+                  <span class="ai-element__label">Fincher.</span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+          <div class='col-2' id='right-bar'>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      <p>
+
+      </p>
+    </div>
+
+
+    <div class='col-3'></div>
+
+
+  </div>
+
+  </div>
+
+
+
+
+
+  <br>
+
+
+  <!-- Shot Types Heading-->
+  <div class='container tmp'>
+    <div class='row'>
+      <div class='col-3'></div>
+      <div class='col-6'>
+        <h4 class='text-center' id='dataset'>Shot Types</h4>
+      </div>
+      <div class='col-3'></div>
+    </div>
+  </div>
+
+  <br>
+
+  <!-- Shot Types -->
+  <div class='container'>
+    <div class='row shot-showcase' id='data-ews'>
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6> Extreme Wide Shot </h6>
+      </div>
+      <div class='col-8' id='middle-bar'>
+        <div id="EWS" class="col-12 carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#EWS" data-slide-to="0" class="active"></li>
+            <li data-target="#EWS" data-slide-to="1"></li>
+            <li data-target="#EWS" data-slide-to="2"></li>
+            <li data-target="#EWS" data-slide-to="3"></li>
+            <li data-target="#EWS" data-slide-to="4"></li>
+            <li data-target="#EWS" data-slide-to="5"></li>
+            <li data-target="#EWS" data-slide-to="6"></li>
+            <li data-target="#EWS" data-slide-to="7"></li>
+            <li data-target="#EWS" data-slide-to="8"></li>
+            <li data-target="#EWS" data-slide-to="9"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/img/valid/ews/10cloverfield003.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: 10 Cloverfield Lane (2016)<br>
+                  <b>Director</b>: Dan Trachtenberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Wide Shot
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="assets/img/valid/ews/boyhood_6310.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Boyhood (2014)<br>
+                  <b>Director</b>: Richard Linklater
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Wide Shot
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="assets/img/valid/ews/chaplin_356.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Chaplin (1992)<br>
+                  <b>Director</b>: Richard Attenborough
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Wide Shot
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="assets/img/valid/ews/the-fifth-element_02129.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: The Fifth Element (1997)<br>
+                  <b>Director</b>: Luc Besson
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Wide Shot
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="assets/img/valid/ews/the-fifth-element_46128.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: The Fifth Element (1997)<br>
+                  <b>Director</b>: Luc Besson
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Wide Shot
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="assets/img/valid/ews/boyhood_0110.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Boyhood (2014)<br>
+                  <b>Director</b>: Richard Linklater
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Wide Shot
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="assets/img/valid/ews/chaplin_086.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Chaplin (1992)<br>
+                  <b>Director</b>: Richard Attenborough
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Wide Shot
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="assets/img/valid/ews/chaplin_456.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Chaplin (1992)<br>
+                  <b>Director</b>: Richard Attenborough
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Wide Shot
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="assets/img/valid/ews/the-fifth-element_28131.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: The Fifth Element (1997)<br>
+                  <b>Director</b>: Luc Besson
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Wide Shot
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="assets/img/valid/ews/10cloverfield052.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: 10 Cloverfield Lane (2016)<br>
+                  <b>Director</b>: Dan Trachtenberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Wide Shot
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <a class="carousel-control-prev" href="#EWS" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#EWS" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          An <i>Extreme Wide Shot</i> (EWS) emphasises the vastness of the
+          location
+        </p>
+        <p>
+          When there is a subject, it usually occupies a
+          very small part of the frame
+        </p>
+      </div>
+    </div>
+
+    <div class='row shot-showcase' id='data-ls'>
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6> Long Shot </h6>
+      </div>
+      <div class='col-8' id='middle-bar'>
+        <div id="LS" class="col-12 carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#LS" data-slide-to="0" class="active"></li>
+            <li data-target="#LS" data-slide-to="1"></li>
+            <li data-target="#LS" data-slide-to="2"></li>
+            <li data-target="#LS" data-slide-to="3"></li>
+            <li data-target="#LS" data-slide-to="4"></li>
+            <li data-target="#LS" data-slide-to="5"></li>
+            <li data-target="#LS" data-slide-to="6"></li>
+            <li data-target="#LS" data-slide-to="7"></li>
+            <li data-target="#LS" data-slide-to="8"></li>
+            <li data-target="#LS" data-slide-to="9"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/img/valid/ls/chaplin_016_tight.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Chaplin (1992)<br>
+                  <b>Director</b>: Richard Attenborough
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ls/boyhood_1310_tight.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Boyhood (2014)<br>
+                  <b>Director</b>: Richard Linklater
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ls/chaplin_466_tight.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Chaplin (1992)<br>
+                  <b>Director</b>: Richard Attenborough
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ls/catch-me-if-you-can_3323.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Catch Me If You Can (2002)<br>
+                  <b>Director</b>: Steven Spielberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ls/catch-me-if-you-can_6214.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Catch Me If You Can (2002)<br>
+                  <b>Director</b>: Steven Spielberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ls/gangs-of-new-york_3095.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Gangs of New York (2002)<br>
+                  <b>Director</b>: Martin Scorsese
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Long Shot
+                </p>
+              </div>
+
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ls/gangs-of-new-york_4792.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Gangs of New York (2002)<br>
+                  <b>Director</b>: Martin Scorsese
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Long Shot
+                </p>
+              </div>
+
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ls/good-will-hunting_goodwillhunting054.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Good Will Hunting (1997)<br>
+                  <b>Director</b>: Gus Van Sant
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ls/google_24-best-wide-shots-images-on-pinterest-wide-angle-shot.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>TV Show</b>: Breaking Bad (2008-2013)<br>
+                  <b>Creator</b>: Vince Gilligan
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ls/taxi-driver_19-sometime-sweet-susan.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Taxi Driver (1976)<br>
+                  <b>Director</b>: Martin Scorsese
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Long Shot
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <a class="carousel-control-prev" href="#LS" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#LS" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          A <i>Long Shot</i> (LS) includes characters in their entirety,
+          and in some cases,
+          a portion of the subject's surounding area
+        </p>
+      </div>
+    </div>
+
+    <div class='row shot-showcase' id='data-ms'>
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6> Medium Shot </h6>
+      </div>
+      <div class='col-8' id='middle-bar'>
+        <div id="MS" class="col-12 carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#MS" data-slide-to="0" class="active"></li>
+            <li data-target="#MS" data-slide-to="1"></li>
+            <li data-target="#MS" data-slide-to="2"></li>
+            <li data-target="#MS" data-slide-to="3"></li>
+            <li data-target="#MS" data-slide-to="4"></li>
+            <li data-target="#MS" data-slide-to="5"></li>
+            <li data-target="#MS" data-slide-to="6"></li>
+            <li data-target="#MS" data-slide-to="7"></li>
+            <li data-target="#MS" data-slide-to="8"></li>
+            <li data-target="#MS" data-slide-to="9"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/img/valid/ms/catch-me-if-you-can_3124.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Catch Me If You Can (2002)<br>
+                  <b>Director</b>: Steven Spielberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ms/chaplin_216.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Chaplin (1992)<br>
+                  <b>Director</b>: Richard Attenborough
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ms/fight-club_15-cigarette-burn.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Fight Club (1999)<br>
+                  <b>Director</b>: David Fincher
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ms/fight-club_32-soap-shop.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Fight Club (1999)<br>
+                  <b>Director</b>: David Fincher
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ms/good-will-hunting_goodwillhunting051.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Good Will Hunting (1997)<br>
+                  <b>Director</b>: Gus Van Sant
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ms/good-will-hunting_goodwillhunting061.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Good Will Hunting (1997)<br>
+                  <b>Director</b>: Gus Van Sant
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ms/taxi-driver_35-device.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Taxi Driver (1976)<br>
+                  <b>Director</b>: Martin Scorsese
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ms/taxi-driver_42-with-iris.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Taxi Driver (1976)<br>
+                  <b>Director</b>: Martin Scorsese
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ms/the-big-lebowski_3570.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: The Big Lebowski (1998)<br>
+                  <b>Director</b>: Ethan Coen, Joel Coen
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ms/10cloverfield053.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: 10 Cloverfield Lane (2016)<br>
+                  <b>Director</b>: Dan Trachtenberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Shot
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <a class="carousel-control-prev" href="#MS" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#MS" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          A <i>Medium Shot</i> (MS) shows the character from the waist up
+        </p>
+        <p>
+          Allows one to see the nuances of the character's behavior and
+          body language
+        </p>
+      </div>
+    </div>
+
+    <div class='row shot-showcase' id='data-mcu'>
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6> Medium Close Up </h6>
+      </div>
+      <div class='col-8' id='middle-bar'>
+        <div id="MCU" class="col-12 carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#MCU" data-slide-to="0" class="active"></li>
+            <li data-target="#MCU" data-slide-to="1"></li>
+            <li data-target="#MCU" data-slide-to="2"></li>
+            <li data-target="#MCU" data-slide-to="3"></li>
+            <li data-target="#MCU" data-slide-to="4"></li>
+            <li data-target="#MCU" data-slide-to="5"></li>
+            <li data-target="#MCU" data-slide-to="6"></li>
+            <li data-target="#MCU" data-slide-to="7"></li>
+            <li data-target="#MCU" data-slide-to="8"></li>
+            <li data-target="#MCU" data-slide-to="9"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/img/valid/mcu/10cloverfield023.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: 10 Cloverfield Lane (2016)<br>
+                  <b>Director</b>: Dan Trachtenberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mcu/boyhood_4910.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Boyhood (2014)<br>
+                  <b>Director</b>: Richard Linklater
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mcu/catch-me-if-you-can_0624.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Catch Me If You Can (2002)<br>
+                  <b>Director</b>: Steven Spielberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mcu/the-big-lebowski_3070.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: The Big Lebowski (1998)<br>
+                  <b>Director</b>: Ethan Coen, Joel Coen
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mcu/chaplin_555.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Chaplin (1992)<br>
+                  <b>Director</b>: Richard Attenborough
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mcu/fight-club_21-bus.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Fight Club (1999)<br>
+                  <b>Director</b>: David Fincher
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mcu/gangs-of-new-york_5878.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Gangs of New York (2002)<br>
+                  <b>Director</b>: Martin Scorsese
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Close Up
+                </p>
+              </div>
+
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mcu/good-will-hunting_goodwillhunting064.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Good Will Hunting (1997)<br>
+                  <b>Director</b>: Gus Van Sant
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mcu/the_25th_hour_13-at-window.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: The 25th Hour (2002)<br>
+                  <b>Director</b>: Spike Lee
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mcu/taxi-driver_53-mohawk.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Taxi Driver (1976)<br>
+                  <b>Director</b>: Martin Scorsese
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Close Up
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <a class="carousel-control-prev" href="#MCU" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#MCU" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          A <i>Medium Close Up</i> (MCU) shows the character
+          from the chest/shoulders up
+        </p>
+        <p>
+          Allows one to see the nuances of the character's
+          facial expressions, and some body language
+        </p>
+      </div>
+    </div>
+
+    <div class='row shot-showcase' id='data-cu'>
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6> Close Up </h6>
+      </div>
+      <div class='col-8' id='middle-bar'>
+        <div id="CU" class="col-12 carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#CU" data-slide-to="0" class="active"></li>
+            <li data-target="#CU" data-slide-to="1"></li>
+            <li data-target="#CU" data-slide-to="2"></li>
+            <li data-target="#CU" data-slide-to="3"></li>
+            <li data-target="#CU" data-slide-to="4"></li>
+            <li data-target="#CU" data-slide-to="5"></li>
+            <li data-target="#CU" data-slide-to="6"></li>
+            <li data-target="#CU" data-slide-to="7"></li>
+            <li data-target="#CU" data-slide-to="8"></li>
+            <li data-target="#CU" data-slide-to="9"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/img/valid/cu/10cloverfield019.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: 10 Cloverfield Lane (2016)<br>
+                  <b>Director</b>: Dan Trachtenberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/cu/google_45097637976013147494.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: NA<br>
+                  <b>Director</b>: NA
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/cu/fight-club_02-bob.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Fight Club (1999)<br>
+                  <b>Director</b>: David Fincher
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/cu/good-will-hunting_goodwillhunting005.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Good Will Hunting (1997)<br>
+                  <b>Director</b>: Gus Van Sant
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/cu/the-fifth-element_47122.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: The Fifth Element (1997)<br>
+                  <b>Director</b>: Luc Besson
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/cu/good-will-hunting_goodwillhunting031.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Good Will Hunting (1997)<br>
+                  <b>Director</b>: Gus Van Sant
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/cu/catch-me-if-you-can_2224.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Catch Me If You Can (2002)<br>
+                  <b>Director</b>: Steven Spielberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/cu/google_71751692195015188803.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: NA<br>
+                  <b>Director</b>: NA
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/cu/google_A-Bout-de-Souffle.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: À bout de souffle (Breathless) (1960)<br>
+                  <b>Director</b>: Jean-Luc Godard
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/cu/boyhood_0410.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Boyhood (2014)<br>
+                  <b>Director</b>: Richard Linklater
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Close Up
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <a class="carousel-control-prev" href="#CU" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#CU" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          A <i>Close Up</i> (CU) shows the face of the character,
+          sometimes including the
+          neck/shoulders
+        </p>
+        <p>
+          Emphasises the facial expressions of the character
+        </p>
+      </div>
+    </div>
+
+    <div class='row shot-showcase' id='data-ecu'>
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6> Extreme Close Up </h6>
+      </div>
+      <div class='col-8' id='middle-bar'>
+        <div id="ECU" class="col-12 carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#ECU" data-slide-to="0" class="active"></li>
+            <li data-target="#ECU" data-slide-to="1"></li>
+            <li data-target="#ECU" data-slide-to="2"></li>
+            <li data-target="#ECU" data-slide-to="3"></li>
+            <li data-target="#ECU" data-slide-to="4"></li>
+            <li data-target="#ECU" data-slide-to="5"></li>
+            <li data-target="#ECU" data-slide-to="6"></li>
+            <li data-target="#ECU" data-slide-to="7"></li>
+            <li data-target="#ECU" data-slide-to="8"></li>
+            <li data-target="#ECU" data-slide-to="9"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/img/valid/ecu/fight-club_01-narrator.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Fight Club (1999)<br>
+                  <b>Director</b>: David Fincher
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ecu/vimeo_fincher_ecu_61.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Fight Club (1999)<br>
+                  <b>Director</b>: David Fincher
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ecu/gangs-of-new-york_0598.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Gangs of New York (2002)<br>
+                  <b>Director</b>: Martin Scorsese
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Close Up
+                </p>
+              </div>
+
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ecu/the-fifth-element_6393.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: The Fifth Element (1997)<br>
+                  <b>Director</b>: Luc Besson
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ecu/vimeo_fincher_ecu_44.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: NA<br>
+                  <b>Director</b>: David Fincher
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ecu/vimeo_fincher_ecu_21.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Zodiac (2007)<br>
+                  <b>Director</b>: David Fincher
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ecu/vimeo_fincher_ecu_17.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Fight Club (1999)<br>
+                  <b>Director</b>: David Fincher
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ecu/the-big-lebowski_4069.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: The Big Lebowski (1998)<br>
+                  <b>Director</b>: Ethan Coen, Joel Coen
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ecu/fight-club_48-boarding-pass.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Fight Club (1999)<br>
+                  <b>Director</b>: David Fincher
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Close Up
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ecu/gangs-of-new-york_0199.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Gangs of New York (2002)<br>
+                  <b>Director</b>: Martin Scorsese
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Extreme Close Up
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <a class="carousel-control-prev" href="#ECU" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#ECU" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          An <i>Extreme Close Up</i> (ECU) highly zooms in to any one
+          feature of the subject to draw
+          attention to that feature specifically
+        </p>
+      </div>
+    </div>
+
+    <br>
+    <h4 class='text-center' id='data-fut'>
+      More Shot Types
+      <small class="text-muted"> (Coming Soon)</small></h4>
+
+    <div class='row shot-showcase' id='data-fut-ws'>
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6> Wide Shot </h6>
+      </div>
+      <div class='col-8' id='middle-bar'>
+        <div id="WS" class="col-12 carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#WS" data-slide-to="0" class="active"></li>
+            <li data-target="#WS" data-slide-to="1"></li>
+            <li data-target="#WS" data-slide-to="2"></li>
+            <li data-target="#WS" data-slide-to="3"></li>
+            <li data-target="#WS" data-slide-to="4"></li>
+            <li data-target="#WS" data-slide-to="5"></li>
+            <li data-target="#WS" data-slide-to="6"></li>
+            <li data-target="#WS" data-slide-to="7"></li>
+            <li data-target="#WS" data-slide-to="8"></li>
+            <li data-target="#WS" data-slide-to="9"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/img/valid/ws/500_days_33.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: 500 Days (2009)<br>
+                  <b>Director</b>: Marc Webb
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Wide Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ws/2001_space_odyssey_14-hallway1.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: 2001: A Space Odyssey (1968)<br>
+                  <b>Director</b>: Stanley Kubrick
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Wide Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ws/a-clockwork-orange_46-findings.png_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: A Clockwork Orange (1971)<br>
+                  <b>Director</b>: Stanley Kubrick
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Wide Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ws/across_the_universe_063.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Across The Universe (2007)<br>
+                  <b>Director</b>: Julie Taymor
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Wide Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ws/adam_resurrected_3342.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Adam Resurrected (2008)<br>
+                  <b>Director</b>: Paul Schrader
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Wide Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ws/adaptation_0653.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Adaptation (2002)<br>
+                  <b>Director</b>: Spike Jonze
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Wide Shot
+                </p>
+              </div>
+
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ws/adaptation_3652.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Adaptation (2002)<br>
+                  <b>Director</b>: Spike Jonze
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Wide Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ws/ai032.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: A.I. Artificial Intelligence (2001)<br>
+                  <b>Director</b>: Steven Spielberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Wide Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ws/ali_ali054.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Ali (2001)<br>
+                  <b>Director</b>: Michael Mann
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Wide Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ws/alice-in-wonderland_aliceinwonderland42.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Alice in Wonderland (2010)<br>
+                  <b>Director</b>: Tim Burton
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Wide Shot
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <a class="carousel-control-prev" href="#WS" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#WS" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          A Wide Shot falls between an Extreme Wide Shot and
+          Long Shot
+        </p>
+        <p>
+          Subjects are a key element in the frame but the
+          background takes up a large percentage of the frame
+        </p>
+      </div>
+    </div>
+
+    <div class='row shot-showcase' id='data-fut-mls'>
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6> Medium Long Shot </h6>
+      </div>
+      <div class='col-8' id='middle-bar'>
+        <div id="MLS" class="col-12 carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#MLS" data-slide-to="0" class="active"></li>
+            <li data-target="#MLS" data-slide-to="1"></li>
+            <li data-target="#MLS" data-slide-to="2"></li>
+            <li data-target="#MLS" data-slide-to="3"></li>
+            <li data-target="#MLS" data-slide-to="4"></li>
+            <li data-target="#MLS" data-slide-to="5"></li>
+            <li data-target="#MLS" data-slide-to="6"></li>
+            <li data-target="#MLS" data-slide-to="7"></li>
+            <li data-target="#MLS" data-slide-to="8"></li>
+            <li data-target="#MLS" data-slide-to="9"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/img/valid/mls/10cloverfield030.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: 10 Cloverfield Lane (2016)<br>
+                  <b>Director</b>: Dan Trachtenberg
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mls/12_years_a_slave_1733.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: 12 Years a Slave (2013)<br>
+                  <b>Director</b>: Steve McQueen
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mls/2046_312.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: 2046 (2004)<br>
+                  <b>Director</b>: Wong Kar-wai
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mls/chaplin_296.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Chaplin (1992)<br>
+                  <b>Director</b>: Richard Attenborough
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/ws/adam_resurrected_3342.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Ex Machina (2014)<br>
+                  <b>Director</b>: Alex Garland
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mls/ex-machina_60.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Ex Machina (2014)<br>
+                  <b>Director</b>: Alex Garland
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mls/fear-and-loathing-in-las-vegas_1024.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Fear and Loathing in Las Vegas (1998)<br>
+                  <b>Director</b>: Terry Gilliam
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mls/filth_2389.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Filth (2013)<br>
+                  <b>Director</b>: Jon S. Baird
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Long Shot
+                </p>
+              </div>
+
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mls/gangster-squad_3518.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: Gangster Squad (2013)<br>
+                  <b>Director</b>: Ruben Fleischer
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Long Shot
+                </p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="assets/img/valid/mls/the-black-dahlia_031.jpg_cropped.jpg" class="d-block w-100" alt="...">
+              <div class='carousel-caption-right'>
+                <p>
+                  <b>Film</b>: The Black Dahlia (2006)<br>
+                  <b>Director</b>: Brian De Palma
+                </p>
+              </div>
+              <div class='carousel-caption-left'>
+                <p>
+                  <b>Shot Type</b>: Medium Long Shot
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <a class="carousel-control-prev" href="#MLS" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#MLS" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="false"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          A Medium Long Shot falls between a Long Shot and
+          a Medium Shot
+        </p>
+        <p>
+          Characters are usually shown from their knees up, or
+          from the waist up with a decent portino of the
+          background visible
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  <!-- Methodology -->
+  <div class='container'>
+    <div class='row post-content methodology'>
+      <div class='col-3' id='left-bar'></div>
+      <div class='col-6' id='middle-bar'>
+        <h3 id='method' class='text-center'>Methodology</h3>
+        <br>
+        <p>
+          The training process was in sync with
+          <a href='https://course.fast.ai/' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">fastai's</span>
+          </a>
+          methodology (
+          <a href='https://docs.fast.ai/vision.transform.html' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">transfer learning</span>
+          </a>,
+          <a href='https://docs.fast.ai/vision.transform.html' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">data augmentation</span>
+          </a>,
+          <a href='https://sgugger.github.io/the-1cycle-policy.html' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">fit one cycle policy</span>
+          </a>,
+          <a href='https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">learning rate finder</span>
+          </a>, etc).
+          I won't go into too much detail here as this is already
+          very well documented in
+          <a href='https://github.com/rsomani95/shot-type-classifier/blob/master/methodology.ipynb' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">this Jupyter notebook</span>
+          </a>.
+
+        </p>
+
+        <p>
+          The model used is a pretrained
+          <a href='http://teleported.in/posts/decoding-resnet-architecture/?source=post_page' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label"><code>ResNet-50</code></span>
+          </a> that was trained using fastai's best
+          practices, most of which are built into the library.
+          The only part of the training process that I haven't seen used
+          extensively, though mentioned by Jeremy in
+          <a href='https://youtu.be/PW2HKkzdkKY?t=3030' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">this</span>
+          </a> lecture,
+          was that of <i>progressive image resizing</i> (perhaps <i>cyclical
+            transfer learning</i> is a better term). This is a process where
+          you take a pretrained model (almost always a <code>ResNet-xx</code>
+          pretrained on <code>ImageNet</code>), fine-tune it on your dataset,
+          and then repeat the process with a larger image size. Here's a
+          visual explanation:
+        </p>
+      </div>
+      <div class='col-3 align-self-center' id='right-bar'>
+        <p>
+          You cannot replicate the training process as the training
+          data has not been made public <i>yet</i>. However, you
+          can use my pretrained model to predict shot types on your own
+          images, or to re-evaluate the validation set.
+        </p>
+        <br>
+        <p>
+          While doing this project, I thought up and implemented a new kind
+          of data augmentation called
+          <a href='https://docs.fast.ai/vision.transform.html#_rgb_randomize' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">
+              <code>rgb_randomize</code>
+            </span>
+          </a>
+          that is now part of the fastai library.
+        </p>
+      </div>
+    </div>
+    <div class='row post-content'>
+      <div class='col-10'>
+        <img src='assets/svg/cyclical-transfer-learning.svg'>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          This diagram of a <code>ResNet-50</code> isn't 100% accurate -- it doesn't include
+          skip connections. In a later post, I will explain how a ResNet works
+          with a more complete version of these diagrams.
+        </p>
+        <br><br><br><br><br>
+        <p> At each stage, the network is first trained when frozen with
+          a learning rate of ~<code>1e-3</code> and then unfrozen and fine tuned with a
+          learning rate of ~<code>slice(1e-6, 1e-3)</code>
+          <p>
+      </div>
+    </div>
+
+    <div class='row post-content'>
+      <div class='col-3' id='left-bar'></div>
+      <div class='col-6' id='middle-bar'>
+        <h3 class='text-center'> Results </h3>
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+
+    <br>
+
+    <div class='row post-content training-summary' id='results-perf'>
+      <div class='col-3 align-self-center' id='left-bar'>
+        <p class='text'>
+          <b>Training Loss</b>: Lower is better as long as
+          validation loss keeps dropping
+        </p>
+        <p>
+          <b>Validation Loss</b>: Lower is always better
+        </p>
+      </div>
+      <div class='col-6' id='middle-bar'>
+        <h4> Training Performance </h4>
+        <table class="table table-bordered table-condensed">
+          <thead class='thead-dark text-center'>
+            <tr>
+              <th scope="col" width=''>Epoch</th>
+              <th scope="col" width=''>Training Loss</th>
+              <th scope="col" width=''>Validation Loss</th>
+              <th scope="col" width=''>Accuracy</th>
+              <th scope="col" width=''>Time</th>
+            </tr>
+          </thead>
+          <tbody class='text-center'>
+            <tr>
+              <td class="font-weight-bold">1</td>
+              <td>0.364</td>
+              <td>0.271</td>
+              <td>0.903</td>
+              <td>07:57</td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">2</td>
+              <td>0.357</td>
+              <td>0.269</td>
+              <td>0.905</td>
+              <td>07:56</td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">3</td>
+              <td>0.362</td>
+              <td>0.267</td>
+              <td>0.898</td>
+              <td>07:58</td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">4</td>
+              <td>0.333</td>
+              <td class="font-weight-bold">0.250</td>
+              <td>0.908</td>
+              <td>07:57</td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">5</td>
+              <td>0.316</td>
+              <td>0.255</td>
+              <td>0.907</td>
+              <td>08:01</td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">6</td>
+              <td>0.303</td>
+              <td>0.255</td>
+              <td>0.910</td>
+              <td>07:58</td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">7</td>
+              <td>0.297</td>
+              <td>0.274</td>
+              <td>0.900</td>
+              <td>08:00</td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">8</td>
+              <td>0.291</td>
+              <td>0.258</td>
+              <td>0.907</td>
+              <td>08:00</td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">9</td>
+              <td>0.281</td>
+              <td class="font-weight-bold">0.250</td>
+              <td class="font-weight-bold">0.910</td>
+              <td>07:59</td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">10</td>
+              <td class="font-weight-bold">0.278</td>
+              <td>0.255</td>
+              <td class="font-weight-bold">0.910</td>
+              <td>07:58</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          The network peaks at an accuracy of <b>91.0%</b> on the validation set,
+          which is arguably a good result. I suspect this number would rise on
+          a larger dataset, as each image wrongly classified would account for
+          a smaller % decrease in accuracy. Gains from a lower validation loss
+          would be more palpable, the opposite of which can be seen in this
+          table.
+        </p>
+      </div>
+      <div class='col-3 align-self-center' id='right-bar'>
+        <p>
+          This table is extracted from the methodology
+          <a href='https://github.com/rsomani95/shot-type-classifier/blob/master/methodology.ipynb' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label"> notebook</span>
+          </a> and shows the last stage of
+          training - <code>Stage 3.2</code>.
+        </p>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Confusion Matrix -->
+    <div class='row post-content' id='results-conf-mat'>
+      <div class='col-3' id='left-bar'></div>
+      <div class='col-6' id='middle-bar'>
+        <h4> Confusion Matrix </h4>
+        <p>
+          From the confusion matrix below, its clear that
+          the model performs best for Extreme Wide Shots
+          (EWS), Medium Close Ups (MCU), Close Ups (CU),
+          and Extreme Close Ups (ECU).
+          It struggles a bit when detecting Long
+          Shots, often confusing them with Medium
+          Shots.
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+
+    <div class='row post-content' id='results-conf-mat'>
+      <div class='col-3' id='left-bar'></div>
+      <div class='col-6' id='middle-bar'>
+        <img src='assets/svg/conf-matrix.svg'>
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+
+
+
+    <br>
+    <br>
+
+    <!-- Heatmaps -->
+    <div class='row post-content' id='results-heatmaps'>
+      <div class='col-3' id='left-bar'></div>
+      <div class='col-6' id='middle-bar'>
+        <h4> Heatmaps </h4>
+        <br>
+        <p> Heatmaps represent the activations of the neural network. In layman's
+          terms, they show the parts of the image that caused the network to
+          detect its predicted shot type.
+        </p>
+      </div>
+      <div class='col-3' id='right-bar'></div>
+
+      <div class='col-2'></div>
+      <div class='col-8'>
+        <img class='image col-12' src='assets/colorbar/hm-colorbar.png'>
+      </div>
+      <div class='col-2'></div>
+    </div>
+
+    <!--
+    <div class='row post-content' id='results-heatmaps-buttons'>
+      <div class='col-2' id='left-bar'>
+        <p>
+          Each button displays the selected shot type, dut does not close the
+          other shot types being displayed
+        </p>
+      </div>
+
+      <div class='col-8' id='middle-bar'>
+        <div class="btn-group" role="group" aria-label="...">
+
+          <a href="#ews-heatmap" data-toggle='collapse' class="btn btn-primary active" role="button" aria-pressed="true">
+            Extreme Wide Shot
+          </a>
+          <a href="#ls-heatmap" data-toggle='collapse' class="btn btn-primary active" role="button" aria-pressed="true">
+            Long Shot
+          </a>
+          <a href="#ms-heatmap" data-toggle='collapse' class="btn btn-primary active" role="button" aria-pressed="true">
+            Medium Shot
+          </a>
+          <a href="#mcu-heatmap" data-toggle='collapse' class="btn btn-primary active" role="button" aria-pressed="true">
+            Medium Close Up
+          </a>
+          <a href="#cu-heatmap" data-toggle='collapse' class="btn btn-primary active" role="button" aria-pressed="true">
+            Close Up
+          </a>
+          <a href="#ecu-heatmap" data-toggle='collapse' class="btn btn-primary active" role="button" aria-pressed="true">
+            Extreme Close Up
+          </a>
+        </div>
+      </div>
+
+      <div class='col-2' id='right-bar'>
+      </div>
+    </div>
+    -->
+
+    <div class='row post-content' id='heatmap-caption'>
+      <div class='col-2' id='left-bar'>
+        <p>
+
+        </p>
+      </div>
+
+      <div class='col-8' id='middle-bar'>
+
+        <p>
+          <br>
+          Due to an annoying quirk, the sliders on the images below work
+          best if you click on the rightmost/leftmost sides of the
+          images rather than drag the slider.
+        </p>
+      </div>
+
+      <div class='col-2' id='right-bar'>
+      </div>
+    </div>
+
+    <div class='row post-content heatmap collapse show' id='ews-heatmap'>
+
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6>Extreme Wide Shot</h6>
+      </div>
+      <div class='col-8'>
+        <div id="ews-hm-sl" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#ews-hm-sl" data-slide-to="0" class="active"></li>
+            <li data-target="#ews-hm-sl" data-slide-to="1"></li>
+            <li data-target="#ews-hm-sl" data-slide-to="2"></li>
+            <li data-target="#ews-hm-sl" data-slide-to="3"></li>
+            <li data-target="#ews-hm-sl" data-slide-to="4"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ews/1_6_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ews/1_6.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ews/1_14_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ews/1_14.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ews/1_19_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ews/1_19.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ews/1_20_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ews/1_20.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ews/1_22_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ews/1_22.png" />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          The network has learnt to recognise patterns on both the ground and
+          the sky.
+        </p>
+        <p>
+          The foreground is an important factor, as is the human figure
+          when detected.
+        </p>
+        <p>
+          It's interesting to see the network's
+          behavior in low lighting conditions.
+        </p>
+      </div>
+
+    </div>
+
+    <div class='row post-content heatmap collapse show' id='ls-heatmap'>
+
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6>Long Shot</h6>
+      </div>
+      <div class='col-8'>
+        <div id="ls-hm-sl" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#ls-hm-sl" data-slide-to="0" class="active"></li>
+            <li data-target="#ls-hm-sl" data-slide-to="1"></li>
+            <li data-target="#ls-hm-sl" data-slide-to="2"></li>
+            <li data-target="#ls-hm-sl" data-slide-to="3"></li>
+            <li data-target="#ls-hm-sl" data-slide-to="4"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ls/1_27_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ls/1_27.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ls/1_23_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ls/1_23.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ls/1_17_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ls/1_17.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ls/1_10_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ls/1_10.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ls/1_5_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ls/1_5.png" />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          Presence of the entire leg and/or parts of the human body is
+          a determining factor.
+        </p>
+        <p>
+          The network can detect objects in the bakground.
+        </p>
+        <p>
+          Predictions remain stable in low-lighting and are
+          resilient to different camera angles and human pose.
+        </p>
+      </div>
+
+    </div>
+
+    <div class='row post-content heatmap collapse show' id='ms-heatmap'>
+
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6>Medium Shot</h6>
+      </div>
+      <div class='col-8'>
+        <div id="ms-hm-sl" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#ms-hm-sl" data-slide-to="0" class="active"></li>
+            <li data-target="#ms-hm-sl" data-slide-to="1"></li>
+            <li data-target="#ms-hm-sl" data-slide-to="2"></li>
+            <li data-target="#ms-hm-sl" data-slide-to="3"></li>
+            <li data-target="#ms-hm-sl" data-slide-to="4"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ms/1_26_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ms/1_26.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ms/1_16_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ms/1_16.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ms/1_15_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ms/1_15.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ms/1_9_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ms/1_9.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ms/1_2_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ms/1_2.png" />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          The cleanest predictions are based on the presence of a human face and
+          its spatial relationship with the rest of the frame.
+        </p>
+        <p>
+          In lower lighting conditions, it uses other parts of the body and/or
+          elements in the background. It isn't restricted to the presence of a
+          face
+        </p>
+      </div>
+
+    </div>
+
+    <div class='row post-content heatmap collapse show' id='mcu-heatmap'>
+
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6>Medium Close Up</h6>
+      </div>
+      <div class='col-8'>
+        <div id="mcu-hm-sl" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#mcu-hm-sl" data-slide-to="0" class="active"></li>
+            <li data-target="#mcu-hm-sl" data-slide-to="1"></li>
+            <li data-target="#mcu-hm-sl" data-slide-to="2"></li>
+            <li data-target="#mcu-hm-sl" data-slide-to="3"></li>
+            <li data-target="#mcu-hm-sl" data-slide-to="4"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/mcu/1_21_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/mcu/1_21.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/mcu/1_13_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/mcu/1_13.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/mcu/1_12_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/mcu/1_12.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/mcu/1_11_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/mcu/1_11.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/mcu/1_1_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/mcu/1_1.png" />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          The face is clearly the defining factor. The network focuses in on
+          a more specific part of the face when compared to a </code>
+          Medium Shot</code>.
+        </p>
+        <p>
+          When the typical human face isn't in the image, it uses other
+          elements in the frame.
+        </p>
+      </div>
+
+    </div>
+
+    <div class='row post-content heatmap collapse show' id='cu-heatmap'>
+
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6>Close Up</h6>
+      </div>
+      <div class='col-8'>
+
+        <div id="cu-hm-sl" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#cu-hm-sl" data-slide-to="0" class="active"></li>
+            <li data-target="#cu-hm-sl" data-slide-to="1"></li>
+            <li data-target="#cu-hm-sl" data-slide-to="2"></li>
+            <li data-target="#cu-hm-sl" data-slide-to="3"></li>
+            <li data-target="#cu-hm-sl" data-slide-to="4"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/cu/1_28_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/cu/1_28.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/cu/1_24_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/cu/1_24.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/cu/1_8_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/cu/1_8.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/cu/1_7_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/cu/1_7.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/cu/1_4_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/cu/1_4.png" />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          The face is all the more the defining factor. The network focuses in
+          on an even more specific part of the face when compared to a </code>
+          Medium Close Up</code>.
+        </p>
+        <p>
+          It uses other elements in the frame when the face is obscure, camera
+          angle isn't the most common one, or in low lighting conditions.
+        </p>
+      </div>
+
+    </div>
+
+    <div class='row post-content heatmap collapse show' id='ecu-heatmap'>
+
+      <div class='col-2 align-self-center' id='left-bar'>
+        <h6>Extreme Close Up</h6>
+      </div>
+      <div class='col-8'>
+
+        <div id="ecu-hm-sl" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#ecu-hm-sl" data-slide-to="0" class="active"></li>
+            <li data-target="#ecu-hm-sl" data-slide-to="1"></li>
+            <li data-target="#ecu-hm-sl" data-slide-to="2"></li>
+            <li data-target="#ecu-hm-sl" data-slide-to="3"></li>
+            <li data-target="#ecu-hm-sl" data-slide-to="4"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ecu/1_29_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ecu/1_29.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ecu/1_25_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ecu/1_25.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ecu/1_18_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ecu/1_18.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ecu/1_3_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ecu/1_3.png" />
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="juxtapose">
+                <img src="assets/img/heatmaps/final-hms/ecu/1_0_hm.png" />
+                <img src="assets/img/heatmaps/final-hms/ecu/1_0.png" />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class='col-2 align-self-center' id='right-bar'>
+        <p>
+          This is harder to interpret due to the diversity of these shots.
+        </p>
+        <p>
+          The network does a goob job regardless, it scored 95/100 with ECUs.
+        </p>
+      </div>
+
+    </div>
+
+
+
+
+    <br>
+    <br>
+
+    <!-- The Bigger Picture -->
+    <div class='row post-content' id='bigpic'>
+      <div class='col-3' id='left-bar'>
+      </div>
+
+      <div class='col-6' id='middle-bar'>
+        <h3 class='text-center'> The Bigger Picture </h3>
+        <br>
+        <p>
+          My goal is to create tools that help deconstruct movies
+          in a way that isn't just another interesting way of looking
+          at it for film enthusiasts, but that could help filmmakers
+          hone their craft, better understand why cinema works, and
+          to ultimately create better films.
+        </p>
+        <p>
+          A shot type classifier is just one tool.
+          When sticking to single frame analysis, one could build
+          classifiers for recognising
+          <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#camera-focus' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">camera focus</span>
+          </a>,
+          <i>OTS (over-the-shoulder) shots</i>,
+          <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#camera-angles' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label"><i>camera angles</i></span>
+          </a>, etc.
+        </p>
+        <p>
+          Moving over to the video domain
+          (which is nothing but a series of still images), it is
+          feasible to detect
+          <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#camera-movement' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label"><i>camera movements</span>
+          </a>
+          -- zoom, pan, tilt, tracking, swish-
+          pan, etc.</i>, and
+          <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#camera-mechanisms' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label"><i>camera mechanisms</span>
+          </a>
+          -- slider, drone, handheld,
+          gimbal, crane, etc.</i> There is a rich literature on
+          shot boundary (cut) detection, but it hasn't yet been
+          adopted for cinema.
+          Average shot lengths have been worked on
+          quite a bit, as seen
+          <a href='http://www.cinemetrics.lv/database.php' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">here</span>
+          </a>, but this was done manually,
+          and can only be so reliable. For filmmakers,
+          cut detection
+          in combination with shot recognition and the aforementioned
+          applications could help put together a powerful dataset such
+          as this:
+        </p>
+      </div>
+
+      <div class='col-3' id='right-bar'>
+      </div>
+
+
+    </div>
+
+    <div class='row vimeo-table'>
+      <div class='col-1' id='left-bar'>
+      </div>
+
+      <div class='col-5 align-self-center video-embed' id='middle-bar'>
+        <div class='embed-container'>
+          <iframe src='https://player.vimeo.com/video/351858245' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+        </div>
+      </div>
+
+      <div class='col-5 align-self-center' id='middle-bar'>
+        <div class='table-container'>
+          <table class="table table-sm table-responsive table-borderless table-condensed" id='tdk-bank-analysis'>
+            <thead class='thead-dark text-center'>
+              <tr>
+                <th scope="col" width='5%'>#</th>
+                <th scope="col" width=''>Length (s)</th>
+                <th scope="col" width=''>Type</th>
+                <th scope="col" width=''>Camera Angle</th>
+                <th scope="col" width=''>Camera Movement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-weight-bold">1</td>
+                <td>10.42</td>
+                <td>LS, MS</td>
+                <td>Eye Level</td>
+                <td>Zoom</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">2</td>
+                <td>2.25</td>
+                <td>LS</td>
+                <td>Hip&nbsp;Level</td>
+                <td>~Static</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">3</td>
+                <td>0.71</td>
+                <td>MCU</td>
+                <td>Low Angle</td>
+                <td>Static</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">4</td>
+                <td>3.10</td>
+                <td>LS, MS</td>
+                <td>~Eye Level</td>
+                <td>Tracking, Tilt</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">5</td>
+                <td>4.12</td>
+                <td>EWS</td>
+                <td>High Angle</td>
+                <td>Drone, Pan</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">6</td>
+                <td>1.30</td>
+                <td>LS</td>
+                <td>Low Angle</td>
+                <td>~Static</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class='col-1' id='right-bar'>
+
+      </div>
+    </div>
+
+    <div class='row post-content' id='bigpic'>
+      <div class='col-3' id='left-bar'>
+      </div>
+      <div class='col-6' id='middle-bar'>
+        <br><br>
+        <p>
+          A dataset with even some of these metrics, when created on a
+          large scale and grouped/split
+          sensibly, could help build a detailed visual profile of any
+          filmmaker. Perhaps you could build a recommender system that gives
+          you a boiler plate shot breakdown based on the kind of scene
+          you want to shoot.
+        </p>
+        <p>
+          <a href='http://www.cinemetrics.lv/satltdb.php' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">Barry Salt's Database</span>
+          </a>
+          is an aggregation of shot types and camera
+          movements, but it is an <i>aggregation</i>, not a time-series,
+          which makes it useful in an academic context, but not very
+          conducive to practical application.
+        </p>
+        <p>
+          Fredric Brodbeck's
+          <a href='http://cinemetrics.fredericbrodbeck.de/' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">Cinemetrics</span>
+          </a>
+          project is a series of stunning visualisations using
+          film as a data source (and a major source of inspitation
+          for this project). It would be interesting to
+          convert his ideas to another tool in the filmmaker's toolkit.
+      </div>
+
+      <div class='col-3' id='right-bar'>
+      </div>
+    </div>
+
+    <div class='row post-content' id='bigpic'>
+      <div class='col-3' id='left-bar'>
+      </div>
+      <div class='col-6' id='middle-bar'>
+        <p>
+          <a href='https://github.com/luanfujun/deep-photo-styletransfer' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">This</span>
+          </a>
+          neural network is capable of applying the color scheme of
+          image 1 to image 2:
+        </p>
+      </div>
+
+      <div class='col-3 align-self-center' id='right-bar'>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  </div>
+
+  <!-- Style Transfer Images -->
+  <div class='container'>
+    <div class='row post-content' id='style-tf-imgs'>
+      <div class='col-2' id='left-bar'>
+      </div>
+
+      <div class='col-10'>
+        <div class='row'>
+          <div class='col-3' id='middle-bar'>
+            <img src='https://raw.githubusercontent.com/luanfujun/deep-photo-styletransfer/master/examples/input/in9.png'>
+            <p> Image 1 </p>
+          </div>
+          <div class='col-3' id='middle-bar'>
+            <img src='https://raw.githubusercontent.com/luanfujun/deep-photo-styletransfer/master/examples/style/tar9.png'>
+            <p> Image 2 </p>
+          </div>
+          <div class='col-3' id='middle-bar'>
+            <img src='https://raw.githubusercontent.com/luanfujun/deep-photo-styletransfer/master/examples/refine_posterization/refine_9.png'>
+            <p> Output </p>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-2' id='right-bar'>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+  <!-- Conclusion -->
+  <div class='container'>
+    <div class='row post-content'>
+      <div class='col-3' id='left-bar'>
+      </div>
+
+      <div class='col-6' id='middle-bar'>
+        <br>
+        <h3 class='text-center'> Conclusion </h3>
+        <br>
+        <p>
+          In this post, I took you through a neural network that
+          can recognise shot types to a respectable degree. In the
+          last section, I tried to show the immense potential that
+          modern computational techniques hold for better understanding/
+          creation of cinema. What's most exciting about this is that
+          all of this is software-driven, thus easily
+          accessible.
+        </p>
+        <p>
+          I'm releasing the code and the model
+          <a href='https://github.com/rsomani95/shot-type-classifier/' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">here</span>
+          </a>.
+          If you know some basic Python, you should be able to
+          use it to detect shot types of any image you like. Work
+          is underway to increase the kinds of shots it can detect,
+          and to release a web application where you can do the
+          same with no knowledge of programming.
+        </p>
+
+        <p>
+          I hope you enjoyed reading this as much as I
+          did writing it. I'd like to hear what you have to say, so
+          please leave a comment below or reach out to me.
+        </p>
+      </div>
+
+      <div class='col-3' id='right-bar'>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+
+
+
+  </div>
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+
+
+
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+  <script>
+    $('.carousel').carousel({
+      interval: false
+    });
+
+    $('.heatmap .juxtapose').height($('.heatmap .juxtapose').height())
+    $('.heatmap .juxtapose').width($('.heatmap .juxtapose').width())
+
+    $('.vimeo-table .table-container').height()
+    $('.vimeo-table .table-container').width()
+
+    $('.embed-container iframe').height()
+    $('.embed-container iframe').width()
+
+    $('.vimeo-table .table-container').height($('.embed-container iframe').height())
+  </script>
+</body>
