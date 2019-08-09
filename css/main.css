@@ -356,7 +356,7 @@ height: 80vh;
   //text-decoration: underline;
 }
 
-.card {
+.card .card-body{
   padding-right: 20%;
   padding-left: 20%;
 }
