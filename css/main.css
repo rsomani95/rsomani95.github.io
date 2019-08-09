@@ -350,3 +350,13 @@ height: 80vh;
   padding-right: 2.5%;
   padding-left: 2.5%;
 }
+
+.card-body a {
+  color: black;
+  //text-decoration: underline;
+}
+
+.about-me {
+  font-size: 1.2em;
+  padding-right: 0;
+}
