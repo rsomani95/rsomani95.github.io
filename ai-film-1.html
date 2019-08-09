@@ -19,6 +19,20 @@
   <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
   -->
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145407637-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-145407637-1');
+  </script>
+
+
 
   <title>AI For Filmmaking</title>
 </head>
@@ -137,8 +151,8 @@
                 Confusion Matrix </a>
               <a href="#results-heatmaps" class="list-group-item">
                 Heatmaps </a>
-                <a href="#results-robust" class="list-group-item">
-                  Robustness </a>
+              <a href="#results-robust" class="list-group-item">
+                Robustness </a>
             </div>
 
             <!--
@@ -3114,7 +3128,60 @@
       </div>
     </div>
 
+    <!--
+    -->
 
+
+    <div class='container'>
+      <div class='row post-content'>
+        <div class='col-3' id='left-bar'>
+        </div>
+
+        <div class='col-6' id='middle-bar'>
+          <br>
+          <h3 class='text-center'> References </h3>
+          <br>
+        </div>
+
+        <div class='col-3' id='right-bar'>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <div id="disqus_thread"></div>
+    <script>
+      /**
+       *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+       *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+          s = d.createElement('script');
+        s.src = 'https://https-rsomani95-github-io-ai-film-1-html.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
 
@@ -3123,21 +3190,13 @@
 
 
 
-  </div>
-
-
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-
-
 
 
 
   </div>
+
+
+
 
 
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
