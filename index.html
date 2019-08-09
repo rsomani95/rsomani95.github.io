@@ -179,8 +179,7 @@
       <div class='col-9 test'>
         <div class='row intro-writeup'>
           <div class='col-8' id='middle-bar'>
-            <h3 id='intro' data-toggle='collapse' href='#intro-toggle'
-                class='text-center'>
+            <h3 id='intro' data-toggle='collapse' href='#intro-toggle' class='text-center'>
               Introduction
             </h3>
             <br>
@@ -406,16 +405,13 @@
 
               <li>
                 552 Extreme Close Ups from Jacob T. Swinney's video essays on
-                <a href='https://vimeo.com/124258143'
-                  class="r-link ai-element ai-element_type2 ai-element3">
+                <a href='https://vimeo.com/124258143' class="r-link ai-element ai-element_type2 ai-element3">
                   <span class="ai-element__label">Tarantino,</span>
                 </a>
-                <a href='https://vimeo.com/233754252'
-                  class="r-link ai-element ai-element_type2 ai-element3">
+                <a href='https://vimeo.com/233754252' class="r-link ai-element ai-element_type2 ai-element3">
                   <span class="ai-element__label">Aronofsky</span>
                 </a> and
-                <a href='https://vimeo.com/152923976'
-                  class="r-link ai-element ai-element_type2 ai-element3">
+                <a href='https://vimeo.com/152923976' class="r-link ai-element ai-element_type2 ai-element3">
                   <span class="ai-element__label">Fincher.</span>
                 </a>
               </li>
@@ -2285,6 +2281,16 @@
       <div class='col-2'></div>
     </div>
 
+
+
+    <div class='row post-content' id='results-conf-mat'>
+      <div class='col-3' id='left-bar'></div>
+      <div class='col-6' id='middle-bar'>
+        <img src='assets/svg/conf-matrix.svg'>
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+
     <!--
     <div class='row post-content' id='results-heatmaps-buttons'>
       <div class='col-2' id='left-bar'>
@@ -2764,10 +2770,71 @@
 
     </div>
 
-
-
-
     <br>
+    <br>
+
+  </div>
+
+  <div class='container-fluid'>
+
+    <div class='row post-content' id='results-robust'>
+
+      <div class='col-3 align-self-center' id='left-bar'>
+        <figure class="figure">
+          <img src="http://66.media.tumblr.com/e904e3a8e34f5200f77bc81347f99538/tumblr_nsxn1dbcJx1qfrhwto1_1280.png" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
+          <figcaption class="figure-caption text-center">
+            <b>Non Standard Framing</b><br>
+            Is this a Close Up?<br>
+            <div class='small'>The model is ~80% sure it's an MCU and 20%
+              sure that it's a CU</div>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class='col-6' id='middle-bar'>
+        <h4> Robustness </h4>
+        <p>
+          It's important to take these results with a pinch of salt. The
+          validation set, while diverse, is not comprehensive. For all shots
+          besides an Extreme Wide Shot or an Extreme Close Up, most of the
+          training samples were images that had humans in them. Thought this
+          is usually the case in movies, it isn't so <i>all</i> the time.
+        </p>
+        <p>
+          I've also
+          refrained from including non standard compositions from the training
+          and validation set for two reasons: they represent a minority
+          of shots, and they are difficult to classify. That being said,
+          the model performs well on most commonly found shot types
+          across most cinema.
+        </p>
+        <p>
+          The model <i>could</i> be biased against "foreign" (non-Hollywood)
+          cinema, as it was trained on mostly Hollywood movie stills. However,
+          the heatmaps above show that it is able to detect fundamental
+          features that are seen across all cinema. I haven't tested it
+          thoroughly enough to make a definitive statement regarding this.
+        </p>
+      </div>
+
+      <div class='col-lg-3 align-self-center'>
+        <figure class="figure">
+          <img
+            src="https://scontent-bom1-1.xx.fbcdn.net/v/t1.0-9/21192623_1417796258314601_7579225333690124908_n.jpg?_nc_cat=111&_nc_oc=AQnWmPuxAey8pVbn1iuV274uPmHjl3RXGzvSrdOuivxCro9pVAoSdK6OqW2dQKebSCY&_nc_ht=scontent-bom1-1.xx&oh=b3f1dc30a31553ced3b3f06ccd882082&oe=5DE0418D"
+            class="figure-img img-fluid">
+          <figcaption class="figure-caption text-center">
+            <b>Non Human Framing</b><br>
+            Is this a Long Shot?<br>
+            <div class='small'>
+              The model is baffled. It predicts ~18-22% for each shot class.
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class='container'>
     <br>
 
     <!-- The Bigger Picture -->

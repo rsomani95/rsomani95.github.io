@@ -341,3 +341,12 @@ height: 80vh;
   font-family: 'Adobe Caslon Pro';
   src: url(assets/fonts/ACaslonPro-Regular.otf)
 }
+
+#results-robust figure {
+  margin-top: 15%;
+}
+
+#results-robust #middle-bar {
+  padding-right: 2.5%;
+  padding-left: 2.5%;
+}
