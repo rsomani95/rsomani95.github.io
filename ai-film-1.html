@@ -55,7 +55,7 @@
       </h2>
       <br>
       <h5 class='col-12 text-center'>
-        Rahul Somani, 6th August 2019
+        Rahul Somani, 10th August 2019
       </h5>
       <br>
       <br>
@@ -179,12 +179,14 @@
             </a>
             <div class="list-group collapse" id="ref-toggle">
 
-              <a href="#ref-" class="list-group-item" data-toggle="collapse">
-                Technical</a>
-              <a href="#ref-" class="list-group-item" data-toggle="collapse">
+              <a href="#ref-vis-lang" class="list-group-item">
+                Visual Language</a>
+              <a href="#ref-prev-work" class="list-group-item">
                 Previous Work</a>
-              <a href="#ref-" class="list-group-item" data-toggle="collapse">
-                Etc</a>
+              <a href="#ref-technical" class="list-group-item">
+                Technical</a>
+              <a href="#ref-other" class="list-group-item">
+                Other Related Work</a>
             </div>
 
 
@@ -2045,7 +2047,7 @@
             <span class="ai-element__label">fastai's</span>
           </a>
           methodology (
-          <a href='https://docs.fast.ai/vision.transform.html' class="r-link ai-element ai-element_type2 ai-element3">
+          <a href='https://blog.slavv.com/a-gentle-intro-to-transfer-learning-2c0b674375a0' class="r-link ai-element ai-element_type2 ai-element3">
             <span class="ai-element__label">transfer learning</span>
           </a>,
           <a href='https://docs.fast.ai/vision.transform.html' class="r-link ai-element ai-element_type2 ai-element3">
@@ -3128,8 +3130,11 @@
       </div>
     </div>
 
-    <!--
+    <!-- References
+
     -->
+
+
 
 
     <div class='container'>
@@ -3146,12 +3151,268 @@
         <div class='col-3' id='right-bar'>
         </div>
       </div>
-
-
-
-
-
     </div>
+
+
+    <div class='container cite'>
+      <div class='row post-content' id='ref-vis-lang'>
+        <div class='col-3 align-self-center' id='left-bar'>
+          <h4> Visual Language </h4>
+        </div>
+
+        <div class='col-6 cite-group' id='middle-bar'>
+          <br>
+          <ul>
+            <li>
+              <a href='https://www.youtube.com/watch?v=E679XJellLs'>
+                <i>The Dark Knight</i> Opening Scene
+              </a>
+            </li>
+
+            <li>
+              <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size'>
+                <i>The Ultimate Guide to Camera Shots</i>
+              </a><br>
+              <div class='cite-explain'>
+                Studio Binder's excellent article that would get the beginner up to speed on
+                shot size & camera framing, focus, angles, movements and
+                mechanisms. This source was linked to multiple times in this
+                post.
+              </div>
+            </li>
+
+            <li>
+              <a href='https://books.google.co.in/books?id=h8O2pJXpWa0C&lpg=PP1&pg=PA59#v=onepage&q&f=false'>
+                <i>The Filmmaker's Eye: Learning (and Breaking) the Rules of Cinematic Composition</i>
+              </a><br>
+              <div class='cite-explain'>
+                Gustavo Mercado's book takes a depper dive into the topics
+                touched upon in Studio Binder's article. I used his definition
+                of a <i>Long Shot</i> while building my dataset.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class='col-3' id='right-bar'>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+    <div class='container cite' id='ref-prev-work'>
+      <div class='row post-content'>
+        <div class='col-3 align-self-center' id='left-bar'>
+          <h4> Previous Work </h4>
+        </div>
+
+        <div class='col-6 cite-group' id='middle-bar'>
+          <br>
+          <ul>
+            <li>
+              Savardi, Mattia & Signoroni, Alberto & Migliorati, Pierangelo & Benini, Sergio. (2018)
+              <a href='https://sci-hub.tw/10.1109/ICIP.2018.8451474'>
+                <i>Shot Scale Analysis in Movies by Convolutional Neural Networks</i>
+              </a>
+              2018 25th IEEE International Conference on Image Processing (ICIP).
+              <div class='cite-explain'>
+                This paper was the first one to classify shot types using
+                neural networks. They built a massive dataset (~400,000)
+                images to classify 3 shot types: Long Shots (EWS, WS, LS),
+                Medium Shots (MLS, MS, MCU) and Close Shots (CU, EWS) and
+                achieved an overall accuracy of ~94%.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class='col-3' id='right-bar'>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+    <div class='container cite' id='ref-technical'>
+      <div class='row post-content'>
+        <div class='col-3 align-self-center' id='left-bar'>
+          <h4> Technical </h4>
+        </div>
+
+        <div class='col-6 cite-group' id='middle-bar'>
+          <br>
+          <ul>
+            <li>
+              <a href='https://www.youtube.com/watch?v=aircAruvnKk'>
+                <i>But what is a Neural Network? | Deep learning, chapter 1</i>
+              </a>
+              <div class='cite-explain'>
+                Grant Sanderson's (3Blue1Brown) stunning animation explaining
+                how a neural network works.
+              </div>
+            </li>
+
+            <li>
+              <a href='https://course.fast.ai/'>
+                <i>Practical Deep Learning for Coders, v3</i>
+              </a>
+              <div class='cite-explain'>
+                Fastai's MOOC that enables anyone familiar with the basics
+                of Python to get started with deep learning.
+              </div>
+            </li>
+
+            <li>
+              <a href='https://docs.fast.ai/vision.transform.html#Data-augmentation'>
+                <i>Data Augmentation</i>
+              </a>
+              <div class='cite-explain'>
+                Fastai documentation explaining (with images) what data
+                augmentation is and how to use the augmentations build into
+                the fastai library
+              </div>
+            </li>
+
+            <li>
+              <a href='https://docs.fast.ai/vision.transform.html#_rgb_randomize'>
+                <i><code>rgb_randomize</code></i>
+              </a>
+              <div class='cite-explain'>
+                A unique data augmentation that I implemented, and which is
+                now incorporated into the fastai library.
+              </div>
+            </li>
+
+            <li>
+              <a href='https://blog.slavv.com/a-gentle-intro-to-transfer-learning-2c0b674375a0'>
+                <i>A Gentle Intro to Transfer Learning</i>
+              </a>
+              <div class='cite-explain'>
+                Slav Ivanov's accesible blog post explaining what transfer
+                learning is and when to use it
+              </div>
+            </li>
+
+            <li>
+              <a href='https://sgugger.github.io/the-1cycle-policy.html'>
+                <i>The 1cycle policy</i>
+              </a>
+              <div class='cite-explain'>
+                Sylvain Gugger's blog post explaining Leslie Smith's work
+                on setting certain hyper-parameters: learning rate, momentum
+                and weight decay.
+              </div>
+            </li>
+
+            <li>
+              <a href='https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html'>
+                <i>How Do You Find A Good Learning Rate</i>
+              </a>
+              <div class='cite-explain'>
+                Sylvain Gugger's blog post explaining the theory and code
+                required to set a good learning rate for your model
+              </div>
+            </li>
+
+            <li>
+              <a href='https://youtu.be/PW2HKkzdkKY?t=3030'>
+                <i>Deep Learning Part 1 v3: Lesson 3</i>
+              </a>
+              <div class='cite-explain'>
+                An excerpt from Fastai's lecture explaining what cyclical
+                transfer learning is. Jeremy Howard (the lecturer) calls it
+                'progressive resizing'.
+              </div>
+            </li>
+
+            <li>
+              <a href='http://teleported.in/posts/decoding-resnet-architecture/?source=post_page'>
+                <i>Decoding the ResNet architecture</i>
+              </a>
+              <div class='cite-explain'>
+                Anand Saha's blog post explaining residual learning,
+                residual networks and why & how deeper networks work better.
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+        <div class='col-3' id='right-bar'>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+
+    <div class='container cite' id='ref-other'>
+      <div class='row post-content'>
+        <div class='col-3 align-self-center' id='left-bar'>
+          <h4> Other Related Work </h4>
+        </div>
+
+        <div class='col-6 cite-group' id='middle-bar'>
+          <br>
+          <ul>
+            <li>
+              <a href='http://www.cinemetrics.lv/satltdb.php'>
+                <i>Barry Salt's Database</i>
+              </a>
+              <div class='cite-explain'>
+                One of the earliest quantitave databases on film data,
+                built manually.
+                Consists of three databases: Camera movement, shot scale
+                and average shot length.
+              </div>
+            </li>
+
+            <li>
+              <a href='http://www.cinemetrics.lv/database.php'>
+                <i>Cinemetrics Database</i>
+              </a>
+              <div class='cite-explain'>
+                A community driven database with shot length data on
+                20,167 films (including duplicates). They developed
+                software where you watch a film and press a button to
+                record every time a cut takes place, resulting in a bunch
+                of shot length related statistics.
+              </div>
+            </li>
+
+
+
+            <li>
+              <a href='http://cinemetrics.fredericbrodbeck.de/'>
+                <i>Cinemetrics</i>
+              </a>
+              <div class='cite-explain'>
+                Frederic Brodbeck's graduation project at the Royal Academy
+                of Arts in The Hague. He create a visual "fingerprint" for
+                a film by analysing color, speech, editing structure and
+                motion.
+              </div>
+            </li>
+
+            <li>
+              Luan, F., Paris, S., Shechtman, E., & Bala, K. (2017).
+              <a href=https://github.com/luanfujun/deep-photo-styletransfer> <i>Deep Photo Style Transfer. </i>
+              </a>
+              2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR). doi:10.1109/cvpr.2017.740
+              <div class='cite-explain'>
+                A deep learning approach to applying photorealistic style
+                transfer.
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+        <div class='col-3' id='right-bar'>
+        </div>
+      </div>
+    </div>
+
 
 
     <br>
