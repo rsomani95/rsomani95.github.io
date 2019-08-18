@@ -9,6 +9,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel='stylesheet' href='css/main.css'>
   <link rel='stylesheet' href='css/bootstrap-toc.css'>
   <link rel='stylesheet' href='css/links.css'>
@@ -38,6 +39,8 @@
 </head>
 
 <body>
+  <iframe src='https://gfycat.com/ifr/FocusedSaltyCranefly?controls=0&speed=2&loops=99' frameborder='0' scrolling='no' allowfullscreen width='640' height='453'></iframe>
+
   <div class='container-fluid post-cover'>
     <div class="juxtapose col-12">
       <img src="assets/img/cover/cover-after-revised.png" />
@@ -64,8 +67,18 @@
   <div class='container post-header'>
 
     <div class='row post-content'>
+      <div class='col-2'></div>
+      <div class='col-8 text-center'>
+        <h3> What is Visual Language, and Why Does it Matter?</h3>
+      </div>
+      <div class='col-2'></div>
+    </div>
+
+    <div class='row post-content'>
       <!-- Table of Contents -->
+
       <div class='col-3 toc-wrapper' id='left-bar'>
+        <!--
         <h4>Contents</h4>
         <div class="just-padding toc-wrapper">
 
@@ -118,20 +131,6 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Methodology
             </a>
 
-            <!--
-            <a href="#method-toggle" class="list-group-item" data-toggle="collapse">
-              Methodology
-            </a>
-            <div class="list-group collapse" id="method-toggle">
-
-              <a href="#method-training" class="list-group-item" data-toggle="collapse">
-                Training Process</a>
-
-              <a href="#method-cyc-tl" class="list-group-item" data-toggle="collapse">
-                Cyclical Transfer Learning</a>
-            </div>
-            -->
-
 
             <a href="#results-toggle" class="list-group-item" data-toggle="collapse">
               <span style="font-size: 12px;">&#9658;</span> &nbsp;Results
@@ -147,21 +146,6 @@
               <a href="#results-robust" class="list-group-item">
                 Robustness </a>
             </div>
-
-            <!--
-            <a href="#bigpic-toggle" class="list-group-item" data-toggle="collapse">
-              The Bigger Picture
-            </a>
-            <div class="list-group collapse" id="bigpic-toggle">
-
-              <a href="#bigpic-" class="list-group-item" data-toggle="collapse">
-                Item 3.1</a>
-              <a href="#bigpic-" class="list-group-item" data-toggle="collapse">
-                Item 3.2</a>
-              <a href="#bigpic-" class="list-group-item" data-toggle="collapse">
-                Item 3.3</a>
-            </div>
-           -->
 
             <a href="#bigpic" class="list-group-item">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Bigger Picture
@@ -189,271 +173,618 @@
           </div>
 
         </div>
+      -->
       </div>
 
       <!-- Intro -->
       <div class='col-9 test'>
         <div class='row intro-writeup'>
           <div class='col-8' id='middle-bar'>
-            <h3 id='intro' data-toggle='collapse' href='#intro-toggle' class='text-center'>
-              Introduction
-            </h3>
             <br>
             <p>
-              Visual language is the kernel of cinema.
-              Good cinema and effective visual language are
-              mutually inclusive. Cinematography is an intricate
-              art that consists of multiple elements such as shot
-              size, camera angles, camera movement, lighting,
-              character movement, etc. and how all these elements
-              tie together to tell a compelling visual story.
+              When you're writing something — an email, an essay,
+              a report, a paper, etc, you're using the rules of
+              grammar to put forth your point. Your choice of words,
+              the way you construct the sentence, correct use of
+              punctuation, and most importantly, what you have to
+              say, all contribute towards the effectiveness of your
+              message.
             </p>
             <p>
-              You develop your visual grammar by watching a lot
-              a lot of films, breaking them
-              down to their simplest elements and assessing what
-              makes them effective. <i>This can be an arduous process.</i>
-              <a href='https://www.youtube.com/watch?v=E679XJellLs' class="r-link ai-element ai-element_type2 ai-element3">
-                <span class="ai-element__label">This</span>
-              </a>
-              ~5 min sequence alone has about 92 shots!
+              Cinema is about how ideas and emotions are expressed
+              through a visual form. It's a visual language, and just
+              like any written language, your choice of words (what
+              you put in the shot/frame), the way you construct the
+              sentence (the sequence of shots), correct use of
+              punctuation (editing) and what you have to say (the
+              story) are key factors of creating effective cinema.
+              The comparison doesn't apply rigidly, but is a good
+              starting point to start thinking about cinema as a
+              language.
+            </p>
+            <br>
+            <p>
+              The most basic element of this language is a shot.
+              There's many factors to consider while filming a shot —
+              how much of the frame should the subject occupy (shot
+              scale), should the camera be placed above or below the
+              subject (camera angle), how long should the shot be (shot
+              length), should the camera remain still or move with the
+              subject, and if it's moving, should it move with the subject
+              (tracking shot), turn left or right (pan), tilt up or down,
+              and whether the movement should be smooth or jerky. There
+              are other major visual factors, such as color and lighting,
+              but we'll restrict our scope to these factors only. A
+              filmmaker chooses how to construct a shot based on what
+              he/she wants to convey, and then juxtaposes them effectively
+              to drive home the message.
             </p>
 
-            <p class='text-standout'>
-              This is where neural networks offer ample promise. I developed
-              a neural network that focuses on
-              one fundamental element of visual grammar:
-              <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
-                <span class="ai-element__label">shot types</span>
-              </a>.
-              It's capable of recognising 6 unique shot types, and is
-              <i>~91% accurate</i>. The model, validation set, code used to
-              train the network, and some more useful material is available on
-              <a href='https://github.com/rsomani95/shot-type-classifier/' class="r-link ai-element ai-element_type2 ai-element3">
-                <span class="ai-element__label">this</span>
-              </a>
-              GitHub repository.
-            </p>
+            <br>
+
             <p>
-              To the best of my knowledge, there was
-              <a href='https://www.researchgate.net/publication/230793690_Classifying_cinematographic_shot_types' class="r-link ai-element ai-element_type2 ai-element3">
-                <span class="ai-element__label">an attempt</span>
-              </a> at doing this with neural networks,
-              but the dataset was massive (190,000+ images),
-              private, and the output was restricted to only 3
-              classes. Since the biggest hurdle in tackling this
-              problem was the lack of a dataset, I went through
-              the painstaking process of collecting and manually
-              classifying ~5,700 images.
+              Let's consider this scene from Interstellar. To give you
+              some context, a crew of two researchers and a pilot land on
+              a mysterious planet to collect crucial data from the debris
+              of a previous mission. This planet is very different from
+              Earth -- it is covered in an endless ocean, and its gravity
+              is 130% stronger than Earth's.
             </p>
           </div>
           <div class='col-3' id='right-bar'></div>
         </div>
+      </div>
+    </div>
 
-        <br>
+    <div class='row post-content'>
+      <div class='col-2'></div>
+      <div class='col-8' id='middle-bar'>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/4Hf_XkgE1d0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class='col-2' id='right-bar'></div>
+    </div>
+    <br>
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6' id='middle-bar'>
+        <p>
+          This scene consists of 89 shots, and the average
+          length of each shot is 2.66 seconds.
+        </p>
 
-        <div class='row nn-101-writeup'>
-          <div class='col-8' id='middle-bar'>
-            <h3 id='nn101' class='text-center'> Neural Networks 101
-              <small class="text-muted">(for the uninitiated)</small>
-            </h3>
-            <br>
-            <p>
-              "AI" is most often a buzzword for
-              "deep learning", which is the field that deals with using
-              "neural networks" to learn from data.
-              I'll try and summarise the main idea: say you've got
-              some data and want to make sense of it. It could be something
-              structured, like a
-              dataset of customers' purchasing decisions, or
-              something unstructured, like a bunch of images, audio clips
-              medical scans, or video. You may want to predict
-              a customer's desired products, or algorithmically differentiate
-              the image of a dog and a cat, the sound of sea waves and
-              crickets, a video of a goal being scored vs. the goalkeeper
-              saving the day, or whether a tumor is benign or malignant. If
-              this is the case, a neural network is probably the best way
-              to solve the problem.
-            </p>
-            <p>
-              With a large <i>labelled</i> dataset (1000
-              images of dogs and cats stored separately), you could <i>train</i>
-              a neural network to learn patterns from these images. The
-              network puts the image through a pile of computation, and spits
-              out two probabilities: <code>P(cat)</code> and <code>P(dog)</code>.
-              You calculate how wrong the network was using a <code>loss function</code>,
-              then use calculus (chain rule, or more sophisticatedly
-              <code>backpropagation</code>) to manipulate this pile of computation to
-              produce a more correct output. Do this long enough and with a
-              large enough dataset, and you have in your hands an 'AI'
-              solution to your problem.*
-            </p>
-            <p>
-              If that piqued your interest, I suggest you watch
-              <a href='https://www.youtube.com/watch?v=aircAruvnKk' class="r-link ai-element ai-element_type2 ai-element3">
-                <span class="ai-element__label">this</span>
-              </a> (~19mins) for a fairly detailed explanation of how
-              a neural network works. If you're bursting with excitement,
-              follow through with
-              <a href='https://course.fast.ai/videos/?lesson=1' class="r-link ai-element ai-element_type2 ai-element3">
-                <span class="ai-element__label">this course</span>
-              </a>.
-            </p>
-          </div>
-          <div class='col-3 align-self-center' id='right-bar'>
-            <p>
-              * Of course, this isn't all that deep learning is about.
-              What I've described here is
-              <b>supervised learning.</b>
-            </p>
-            <p>
-              There are several other sub-fields of deep learning
-              that are more nuanced and cutting-edge, such as
-              <b>unsupervised learning</b>, <b>reinforcement learning</b>,
-              and <b>generative modelling</b>, to name a few.
-            </p>
-
-
-            </p>
-          </div>
-        </div>
-
-        <br>
-
-        <div class='row dataset-writeup'>
-          <div class='col-8' id='middle-bar'>
-            <br>
-            <h3 id='data-intro' class='text-center'>Dataset</h3>
-            <br>
-            <p>
-              The training dataset consists of 5,505 images, split into 6
-              <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
-                <span class="ai-element__label">shot types</span>
-              </a>:
-            </p>
-            <table class="table table-condensed table-sm table-borderless" id='dataset-summary'>
-              <tbody>
-                <tr>
-                  <td class='text-right'><a href='#data-ews' id='stype'>
-                      Extreme Wide Shot</a></td>
-                  <td class='text-left'>⟶ &nbsp;&nbsp;631 images</td>
-                </tr>
-                <tr>
-                  <td class='text-right'><a href='#data-ls' id='stype'>
-                      Long Shot</a></td>
-                  <td class='text-left'>⟶ &nbsp;&nbsp;881 images</td>
-                </tr>
-                <tr>
-                  <td class='text-right'><a href='#data-ms' id='stype'>
-                      Medium Shot</a></td>
-                  <td class='text-left'>⟶ &nbsp;&nbsp;1237 images</td>
-                </tr>
-                <tr>
-                  <td class='text-right'><a href='#data-mcu' id='stype'>
-                      Medium Close Up</a></td>
-                  <td class='text-left'>⟶ &nbsp;&nbsp;945 images</td>
-                </tr>
-                <tr>
-                  <td class='text-right'><a href='#data-cu' id='stype'>
-                      Close Up</a></td>
-                  <td class='text-left'>⟶ &nbsp;&nbsp;1027 images</td>
-                </tr>
-                <tr>
-                  <td class='text-right'><a href='#data-ecu' id='stype'>
-                      Extreme Close Up</a></td>
-                  <td class='text-left'>⟶ &nbsp;&nbsp;784 images</td>
-                </tr>
-              </tbody>
-            </table>
-            <p>
-              In a future version, I will be adding two additional
-              shot types -- <b>Wide Shot</b> and <b>Medium Long Shot</b>.
-            </p>
-            <p>
-              Shot sizes can be subjective to some degree.
-              The key distinction in my dataset from the
-              <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
-                <span class="ai-element__label">linked source</span>
-              </a> is
-              that a <b>Long Shot</b> is an <i>extension of a Full
-                Shot</i> with some leeway for wideness.
-              <a href='https://books.google.co.in/books?id=h8O2pJXpWa0C&lpg=PP1&pg=PA59#v=onepage&q&f=false' class="r-link ai-element ai-element_type2 ai-element3">
-                <span class="ai-element__label">Here</span>
-              </a>
-              is a more thorough definition.
-              This will be made
-              clearer with the examples shown below.
-            </p>
-
-            <h5 id='data-sources'>Data Sources</h5>
-            <ul>
-
-              <li>
-                71 films (30-60 images per film) from the
-                <a href='https://film-grab.com/' class="r-link ai-element ai-element_type2 ai-element3">
-                  <span class="ai-element__label">film-grab</span>
-                </a>
-                database
-              </li>
-
-              <li>
-                700+ films (3-6 images per film) from
-                <a href='https://rarbgprx.org/catalog/movies/' class="r-link ai-element ai-element_type2 ai-element3">
-                  <span class="ai-element__label">RARBG</span>
-                </a>
-              </li>
-
-              <li>
-                298 Extreme Wide Shot images from
-                <a href='https://www.pexels.com/' class="r-link ai-element ai-element_type2 ai-element3">
-                  <span class="ai-element__label">Pexels</span>
-                </a>
-              </li>
-
-              <li>
-                Randomly picked images from relevant google image searches,
-                such as
-                <a href='https://www.google.com/search?tbm=isch&source=hp&biw=1280&bih=649&ei=ysZGXf_XDcTlvgSp5b2wCw&q=wide+shot&oq=wide+shot&gs_l=img.3..0l10.10530.11701..12019...0.0..0.180.1192.6j6......0....1..gws-wiz-img.....0..35i39.mNSpZSKH2pM&ved=0ahUKEwj_5Ky2k-njAhXEso8KHalyD7YQ4dUDCAU&uact=5'
-                  class="r-link ai-element ai-element_type2 ai-element3">
-                  <span class="ai-element__label">this</span>
-                </a>
-              </li>
-
-              <li>
-                552 Extreme Close Ups from Jacob T. Swinney's video essays on
-                <a href='https://vimeo.com/124258143' class="r-link ai-element ai-element_type2 ai-element3">
-                  <span class="ai-element__label">Tarantino,</span>
-                </a>
-                <a href='https://vimeo.com/233754252' class="r-link ai-element ai-element_type2 ai-element3">
-                  <span class="ai-element__label">Aronofsky</span>
-                </a> and
-                <a href='https://vimeo.com/152923976' class="r-link ai-element ai-element_type2 ai-element3">
-                  <span class="ai-element__label">Fincher.</span>
-                </a>
-              </li>
-
-            </ul>
-          </div>
-          <div class='col-2' id='right-bar'>
-          </div>
-        </div>
-
+        <p>
+          For almost all the shots showing Cooper (Matthew
+          McConaughey) inside the spacecraft, Nolan uses a
+          <b>Medium Close Up</b>, showing Cooper from the chest up.
+          This allows us to see his facial expressions clearly,
+          as well as a bit of the spacecraft he's in and his
+          upper body movements. Notice how the camera isn't 100%
+          stable. The camera moves slightly according to Cooper's
+          movements, making us feel more involved in this scene.
+        </p>
 
       </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+    <br>
+    <div class='row gifs'>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
+          <video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/WelllitDaringCopperhead-mobile.jpg"
+          style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">
+          Your browser does not support HTML5 video.
+          <source src="https://thumbs.gfycat.com/WelllitDaringCopperhead-mobile.mp4"
+          type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/IncomparableBaggyAlpineroadguidetigerbeetle-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/IncomparableBaggyAlpineroadguidetigerbeetle-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/IncompleteDelayedGentoopenguin-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/IncompleteDelayedGentoopenguin-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+    <div class='row gifs'>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/SereneLameLark-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/SereneLameLark-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/SameBelovedKatydid-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/SameBelovedKatydid-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/MenacingArtisticAppaloosa-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/MenacingArtisticAppaloosa-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+    <br>
+
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6' id='middle-bar'>
+
+        <p>
+          In a <b>Wide Shot</b>, the emphasis is on the space that
+          the characters are in. We're given our first glimpse
+          of the planet with a wide shot. The entire scene has
+          10 wide shots, which are used when the director wants
+          to emphasise the environment. These shots are also
+          longer than the others, allowing the viewer to absorb
+          the detail.
+        </p>
+
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+    <br>
+    <div class='row gifs'>
+      <div class='col-2'></div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/HappygoluckyIllBobcat-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/HappygoluckyIllBobcat-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/OrnateFreeJaeger-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/OrnateFreeJaeger-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class='col-2'></div>
+    </div>
+    <div class='row gifs'>
+      <div class='col-2'></div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/ScaredFarIvorygull-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/ScaredFarIvorygull-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/SparklingJitteryDuck-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/SparklingJitteryDuck-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class='col-2'></div>
+      <!--
+      <div class="embed-responsive  col-4">
+        <iframe class="embed-responsive-item" src='https://gfycat.com/ifr/enragedfatalbufeo' allowfullscreen width='640' height='404'></iframe>
+      </div>
+      -->
+    </div>
+    <br>
+
+
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6' id='middle-bar'>
+        <p>
+          In a <b>Medium Shot</b>, the character is
+          typically shown from the waist up, while
+          still including some of the surrounding area.
+          It lets you showcase the body language of the
+          character while also allowing you to see some
+          nuances in facial expression.
+        </p>
+
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+    <br>
+    <div class='row gifs'>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/TautHeartyHuemul-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/TautHeartyHuemul-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/HandyHospitableAnemone-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/HandyHospitableAnemone-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/ElementaryUnrulyAfricanjacana-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/ElementaryUnrulyAfricanjacana-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+    <div class='row gifs'>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/LongThreadbareBarasingha-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/LongThreadbareBarasingha-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/WeepyHeartyCalf-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/WeepyHeartyCalf-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/AgreeableWeeBordercollie-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/AgreeableWeeBordercollie-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+    <br>
+
+
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6' id='middle-bar'>
+        <p>
+          A <b>Long Shot</b> shot shows the character
+          in its entirety along with a large portion of
+          the surrounding area. In this scene, they're
+          used when showing characters moving around the
+          space.
+        </p>
+
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+    <br>
+    <div class='row gifs'>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/HandyJadedKoalabear-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/HandyJadedKoalabear-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/MilkyAmpleBettong-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/MilkyAmpleBettong-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/ThriftyIncompleteFieldspaniel-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/ThriftyIncompleteFieldspaniel-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+    <br>
+
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6'>
+        <p>
+          An <b>Extreme Wide Shot</b> puts the location
+          of the scene in perspective. Characters occupy
+          almost no space, and the emphasis is purely
+          on the location. Note that this shot is also
+          much longer than the others, allowing the grandness
+          of the location soak in.
+        </p>
+      </div>
+
+      <div class='col-3'></div>
+    </div>
+    <div class='row gifs'>
+      <div class='col-3'></div>
+      <div class="embed-responsive  col-6">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/BowedSingleCommabutterfly-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/BowedSingleCommabutterfly-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class='col-3'></div>
+    </div>
+    <br><br>
+
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6' id='middle-bar'>
+
+        <p>
+          These are the main kinds of shots used in
+          this scene. There are a few more types of
+          shots which will be covered later.
+        </p>
+
+        <p>
+          Let's move on to <b>camera movement</b>. Throughout
+          this scene, the camera is almost <i>never stationary</i>.
+          Whether it's the spaceship getting hit by the wave,
+          a slow walk across the ocean, or desperate running
+          from one point to another, <i>the camera moves in near
+          perfect sync with the characters</i>. This is what really
+          makes you feel the tension like you're <i>in</i> the scene.
+        </p>
+
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+    <div class='row gifs'>
+      <div class='col-2'></div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/QuerulousSomberIsabellineshrike-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/QuerulousSomberIsabellineshrike-mobile.mp4" type="video/mp4">
+        </video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/TintedReflectingCarp-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/TintedReflectingCarp-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class='col-2'></div>
+    </div>
+    <div class='row gifs'>
+      <div class='col-2'></div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/MeaslySpiritedBarbet-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/MeaslySpiritedBarbet-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/ComposedDeadlyCalf-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/ComposedDeadlyCalf-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class='col-2'></div>
+      <!--
+      <div class="embed-responsive  col-4">
+        <iframe class="embed-responsive-item" src='https://gfycat.com/ifr/enragedfatalbufeo' allowfullscreen width='640' height='404'></iframe>
+      </div>
+      -->
+    </div>
+    <br>
+
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6' id='middle-bar'>
+        <p>
+          A <b>pan</b> is when the camera stays
+          at the same point and turns from left to
+          right, or right to left. With the camera
+          fixed at one point, you experience the shot
+          as though you were standing there and
+          watching CASE (the robot) move back and forth.
+          It's difficult to articulate why, but this
+          seems more appropriate than, say, if the camera
+          weren't watching CASE move but instead moving
+          along with it.
+        </p>
+
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+    <div class='row gifs'>
+      <div class='col-2'></div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/ComplicatedShrillGardensnake-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/ComplicatedShrillGardensnake-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class="embed-responsive  col-4">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/FrequentBlackandwhiteFish-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/FrequentBlackandwhiteFish-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class='col-2'></div>
+    </div>
+    <br>
+
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6'>
+        <p>
+          A <b>tilt up</b> is used appropriately to
+          reveal the wave from Dr. Brand's (Anne Hatheway)
+          perspective. As the camera moves up to reveal
+          the height of the wave, the gravity of the
+          situation builds up (no pun intended). This is one
+          of the longest
+          shots in the scene, clocking in at 7.5 seconds.
+          It would not be as impactful if the camera was
+          stationary and placed such that you could see the
+          wave in its entirety.
+        </p>
+      </div>
+
+      <div class='col-3'></div>
+    </div>
+    <div class='row gifs'>
+      <div class='col-3'></div>
+      <div class="embed-responsive  col-6">
+        <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><video loop muted webkit-playsinline="" autoplay poster="https://thumbs.gfycat.com/RawDifferentIndianspinyloach-mobile.jpg" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute;">Your browser does not support HTML5 video.<source src="https://thumbs.gfycat.com/RawDifferentIndianspinyloach-mobile.mp4" type="video/mp4"></video></div>
+      </div>
+      <div class='col-3'></div>
+    </div>
+    <br>
 
 
 
-      <p>
+    <br><br><br><br><br>
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6' id='middle-bar'>
+        <p class='text-standout'>
+          This is where neural networks offer ample promise. I developed
+          a neural network that focuses on
+          one fundamental element of visual grammar:
+          <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">shot types</span>
+          </a>.
+          It's capable of recognising 6 unique shot types, and is
+          <i>~91% accurate</i>. The model, validation set, code used to
+          train the network, and some more useful material is available on
+          <a href='https://github.com/rsomani95/shot-type-classifier/' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">this</span>
+          </a>
+          GitHub repository.
+        </p>
+        <p>
+          To the best of my knowledge, there was
+          <a href='https://www.researchgate.net/publication/230793690_Classifying_cinematographic_shot_types' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">an attempt</span>
+          </a> at doing this with neural networks,
+          but the dataset was massive (190,000+ images),
+          private, and the output was restricted to only 3
+          classes. Since the biggest hurdle in tackling this
+          problem was the lack of a dataset, I went through
+          the painstaking process of collecting and manually
+          classifying ~5,700 images.
+        </p>
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
 
-      </p>
+    <br>
+
+    <div class='row nn-101-writeup'>
+      <div class='col-3' id='left-bar'></div>
+      <div class='col-6' id='middle-bar'>
+        <h3 id='nn101' class='text-center'> Neural Networks 101
+          <small class="text-muted">(for the uninitiated)</small>
+        </h3>
+        <br>
+        <p>
+          "AI" is most often a buzzword for
+          "deep learning", which is the field that deals with using
+          "neural networks" to learn from data.
+          I'll try and summarise the main idea: say you've got
+          some data and want to make sense of it. It could be something
+          structured, like a
+          dataset of customers' purchasing decisions, or
+          something unstructured, like a bunch of images, audio clips
+          medical scans, or video. You may want to predict
+          a customer's desired products, or algorithmically differentiate
+          the image of a dog and a cat, the sound of sea waves and
+          crickets, a video of a goal being scored vs. the goalkeeper
+          saving the day, or whether a tumor is benign or malignant. If
+          this is the case, a neural network is probably the best way
+          to solve the problem.
+        </p>
+        <p>
+          With a large <i>labelled</i> dataset (1000
+          images of dogs and cats stored separately), you could <i>train</i>
+          a neural network to learn patterns from these images. The
+          network puts the image through a pile of computation, and spits
+          out two probabilities: <code>P(cat)</code> and <code>P(dog)</code>.
+          You calculate how wrong the network was using a <code>loss function</code>,
+          then use calculus (chain rule, or more sophisticatedly
+          <code>backpropagation</code>) to manipulate this pile of computation to
+          produce a more correct output. Do this long enough and with a
+          large enough dataset, and you have in your hands an 'AI'
+          solution to your problem.*
+        </p>
+        <p>
+          If that piqued your interest, I suggest you watch
+          <a href='https://www.youtube.com/watch?v=aircAruvnKk' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">this</span>
+          </a> (~19mins) for a fairly detailed explanation of how
+          a neural network works. If you're bursting with excitement,
+          follow through with
+          <a href='https://course.fast.ai/videos/?lesson=1' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">this course</span>
+          </a>.
+        </p>
+      </div>
+      <div class='col-3 align-self-center' id='right-bar'>
+        <p>
+          * Of course, this isn't all that deep learning is about.
+          What I've described here is
+          <b>supervised learning.</b>
+        </p>
+        <p>
+          There are several other sub-fields of deep learning
+          that are more nuanced and cutting-edge, such as
+          <b>unsupervised learning</b>, <b>reinforcement learning</b>,
+          and <b>generative modelling</b>, to name a few.
+        </p>
+
+
+        </p>
+      </div>
+    </div>
+
+    <br>
+
+    <div class='row dataset-writeup'>
+      <div class='col-3' id='left-bar'></div>
+      <div class='col-6' id='middle-bar'>
+        <br>
+        <h3 id='data-intro' class='text-center'>Dataset</h3>
+        <br>
+        <p>
+          The training dataset consists of 5,505 images, split into 6
+          <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">shot types</span>
+          </a>:
+        </p>
+        <table class="table table-condensed table-sm table-borderless" id='dataset-summary'>
+          <tbody>
+            <tr>
+              <td class='text-right'><a href='#data-ews' id='stype'>
+                  Extreme Wide Shot</a></td>
+              <td class='text-left'>⟶ &nbsp;&nbsp;631 images</td>
+            </tr>
+            <tr>
+              <td class='text-right'><a href='#data-ls' id='stype'>
+                  Long Shot</a></td>
+              <td class='text-left'>⟶ &nbsp;&nbsp;881 images</td>
+            </tr>
+            <tr>
+              <td class='text-right'><a href='#data-ms' id='stype'>
+                  Medium Shot</a></td>
+              <td class='text-left'>⟶ &nbsp;&nbsp;1237 images</td>
+            </tr>
+            <tr>
+              <td class='text-right'><a href='#data-mcu' id='stype'>
+                  Medium Close Up</a></td>
+              <td class='text-left'>⟶ &nbsp;&nbsp;945 images</td>
+            </tr>
+            <tr>
+              <td class='text-right'><a href='#data-cu' id='stype'>
+                  Close Up</a></td>
+              <td class='text-left'>⟶ &nbsp;&nbsp;1027 images</td>
+            </tr>
+            <tr>
+              <td class='text-right'><a href='#data-ecu' id='stype'>
+                  Extreme Close Up</a></td>
+              <td class='text-left'>⟶ &nbsp;&nbsp;784 images</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          In a future version, I will be adding two additional
+          shot types -- <b>Wide Shot</b> and <b>Medium Long Shot</b>.
+        </p>
+        <p>
+          Shot sizes can be subjective to some degree.
+          The key distinction in my dataset from the
+          <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">linked source</span>
+          </a> is
+          that a <b>Long Shot</b> is an <i>extension of a Full
+            Shot</i> with some leeway for wideness.
+          <a href='https://books.google.co.in/books?id=h8O2pJXpWa0C&lpg=PP1&pg=PA59#v=onepage&q&f=false' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">Here</span>
+          </a>
+          is a more thorough definition.
+          This will be made
+          clearer with the examples shown below.
+        </p>
+
+        <h5 id='data-sources'>Data Sources</h5>
+        <ul>
+
+          <li>
+            71 films (30-60 images per film) from the
+            <a href='https://film-grab.com/' class="r-link ai-element ai-element_type2 ai-element3">
+              <span class="ai-element__label">film-grab</span>
+            </a>
+            database
+          </li>
+
+          <li>
+            700+ films (3-6 images per film) from
+            <a href='https://rarbgprx.org/catalog/movies/' class="r-link ai-element ai-element_type2 ai-element3">
+              <span class="ai-element__label">RARBG</span>
+            </a>
+          </li>
+
+          <li>
+            298 Extreme Wide Shot images from
+            <a href='https://www.pexels.com/' class="r-link ai-element ai-element_type2 ai-element3">
+              <span class="ai-element__label">Pexels</span>
+            </a>
+          </li>
+
+          <li>
+            Randomly picked images from relevant google image searches,
+            such as
+            <a href='https://www.google.com/search?tbm=isch&source=hp&biw=1280&bih=649&ei=ysZGXf_XDcTlvgSp5b2wCw&q=wide+shot&oq=wide+shot&gs_l=img.3..0l10.10530.11701..12019...0.0..0.180.1192.6j6......0....1..gws-wiz-img.....0..35i39.mNSpZSKH2pM&ved=0ahUKEwj_5Ky2k-njAhXEso8KHalyD7YQ4dUDCAU&uact=5'
+              class="r-link ai-element ai-element_type2 ai-element3">
+              <span class="ai-element__label">this</span>
+            </a>
+          </li>
+
+          <li>
+            552 Extreme Close Ups from Jacob T. Swinney's video essays on
+            <a href='https://vimeo.com/124258143' class="r-link ai-element ai-element_type2 ai-element3">
+              <span class="ai-element__label">Tarantino,</span>
+            </a>
+            <a href='https://vimeo.com/233754252' class="r-link ai-element ai-element_type2 ai-element3">
+              <span class="ai-element__label">Aronofsky</span>
+            </a> and
+            <a href='https://vimeo.com/152923976' class="r-link ai-element ai-element_type2 ai-element3">
+              <span class="ai-element__label">Fincher.</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+      <div class='col-3' id='right-bar'>
+      </div>
     </div>
 
 
-    <div class='col-3'></div>
+  </div>
 
 
+  <div class='container'>
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6' id='middle-bar'>
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
   </div>
-  </div>
+
 
   <br>
 
@@ -3478,6 +3809,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src='js/slick-gifs.js'></script>
+  <script src="js/owl.carousel.min.js"></script>
   <script>
     $('.carousel').carousel({
       interval: false

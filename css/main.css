@@ -16,6 +16,14 @@
 }
 */
 
+.slick-prev:before, .slick-next:before {
+    color:red !important;
+}
+
+.iframe__bottom .gif-views{
+  display: none;
+}
+
 #right-bar {
   font-size: 0.75em;
 }
@@ -336,6 +344,12 @@ height: 80vh;
   font-weight: 500;
   color: #243aab;
 }
+
+.gifs .col-4 video {
+  padding-left: 1px;
+  padding-top: 1px;
+}
+
 
 @font-face {
   font-family: 'Adobe Caslon Pro';
