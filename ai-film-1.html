@@ -518,10 +518,10 @@
           the height of the wave, the gravity of the
           situation builds up (no pun intended). This is one
           of the longest
-          shots in the scene, clocking in at 7.5 seconds.
+          shots in the scene, clocking in at 7.5 seconds. <br>
           Do you think it would be as impactful if the camera was
           stationary and placed such that you could see the
-          wave in its entirety.
+          wave in its entirety?
         </p>
       </div>
 
@@ -575,7 +575,7 @@
           <i>~91% accurate</i>. The model, validation set (the set of
           images used to determine its accuracy), code used to
           train the network, and some more code to classify your own
-          images is available on
+          images is available in
           <a href='https://github.com/rsomani95/shot-type-classifier/' class="r-link ai-element ai-element_type2 ai-element3">
             <span class="ai-element__label">this</span>
           </a>
@@ -610,33 +610,48 @@
         <br>
         <p>
           "AI" is most often a buzzword for
-          "deep learning", which is the field that deals with using
+          "deep learning", the field that uses
           "neural networks" to learn from data.
-          I'll try and summarise the main idea: say you've got
-          some data and want to make sense of it. It could be something
-          structured, like a
-          dataset of customers' purchasing decisions, or
-          something unstructured, like a bunch of images, audio clips
-          medical scans, or video. You may want to predict
-          a customer's desired products, or algorithmically differentiate
-          the image of a dog and a cat, the sound of sea waves and
-          crickets, a video of a goal being scored vs. the goalkeeper
-          saving the day, or whether a tumor is benign or malignant. If
-          this is the case, a neural network is probably the best way
-          to solve the problem.
         </p>
         <p>
-          With a large <i>labelled</i> dataset (1000
-          images of dogs and cats stored separately), you could <i>train</i>
+          The key idea is that instead of explicitly specifying patterns
+          to look for, you specify the rules for the neural network to
+          autonomously detect patterns from data. The data could be something
+          structured, like a
+          database of customers' purchasing decisions, or
+          something unstructured, like images, audio clips,
+          medical scans, or video. Neural networks are good at tasks like
+          predicting
+          a customer's desired products, algorithmically differentiating
+          the image of a dog and a cat, the mating calls of dolphins
+          and whales, a video of a goal being scored vs. the goalkeeper
+          saving the day, or whether a tumor is benign or malignant.
+        </p>
+        <p>
+          With a large enough <i>labelled</i> dataset (say 1000
+          images of dogs and cats stored separately), you could use
           a neural network to learn patterns from these images. The
           network puts the image through a pile of computation, and spits
           out two probabilities: <code>P(cat)</code> and <code>P(dog)</code>.
           You calculate how wrong the network was using a <code>loss function</code>,
-          then use calculus (chain rule, or more sophisticatedly
-          <code>backpropagation</code>) to manipulate this pile of computation to
-          produce a more correct output. Do this long enough and with a
-          large enough dataset, and you have in your hands an 'AI'
-          solution to your problem.*
+          then use calculus (chain rule) to tweak this pile of computation to
+          produce a more correct output. If the network's output was very far off
+          from the truth, the loss is larger, and so the tweak
+          made is also larger. Tweaks that are too large are bad, so you
+          multiply the tweaking factor with a
+          tiny number known as the <code>learning rate</code>.
+          One pass through the entire dataset is known as an <code>epoch</code>.
+          You'd probably run through many <code>epochs</code> to reach
+          a good solution; it's a
+          good idea to tweak the images non-invasively (such as flipping them
+          horizontally), so
+          that the network sees different numbers for the same image and can
+          more robustly detect patterns. This is known as <code>data
+          augmentation</code>.
+        </p>
+        <p>
+          Rinse and repeat this process carefully, and you have in your
+          hands an 'AI' solution to your problem.*
         </p>
         <p>
           If that piqued your interest, I suggest you watch
@@ -677,10 +692,37 @@
         <h3 id='data-intro' class='text-center'>Dataset</h3>
         <br>
         <p>
-          The training dataset consists of 5,505 images, split into 6
+          There is no public dataset that categorises cinematic
+          shots into shot types.
+          There is
+          <a href='https://sci-hub.tw/10.1109/ICIP.2018.8451474' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">one</span>
+          </a> prior research
+          project that classified shot types using neural networks,
+          but the dataset, although massive (~400,000 images),
+          only had 3 output classes (shot types) from 120 films.
+        </p>
+        <p>
+          Thus, the dataset for this
+          project was constructed from scratch. It is diverse,
+          consisting of samples from over 800 movies, collected from
+          various sources. Each image has been looked over 4-5 times
+          to ensure that it has been categorised correctly. Since shot
+          types have room for subjectivity, it's important to note
+          that there is no <b>Full Shot</b> as described
           <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
-            <span class="ai-element__label">shot types</span>
-          </a>:
+            <span class="ai-element__label">here.</span>
+          </a> Instead, there is a <b>Long Shot</b> which is essentially
+          a Full Shot with some leeway for wideness, as described
+          <a href='https://books.google.co.in/books?id=h8O2pJXpWa0C&lpg=PP1&pg=PA59#v=onepage&q&f=false' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">here</span>
+          </a> and evident in the samples shown below.
+        </p>
+
+        <p>
+          In total, the dataset consists of 6,105 (5,505 training
+          + 100 validation) images, split into 6
+          shot types:
         </p>
         <table class="table table-condensed table-sm table-borderless" id='dataset-summary'>
           <tbody>
@@ -718,24 +760,9 @@
         </table>
         <p>
           In a future version, I will be adding two additional
-          shot types -- <b>Wide Shot</b> and <b>Medium Long Shot</b>.
+          shot types: <b>Wide Shot</b> and <b>Medium Long Shot</b>.
         </p>
-        <p>
-          Shot sizes can be subjective to some degree.
-          The key distinction in my dataset from the
-          <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
-            <span class="ai-element__label">linked source</span>
-          </a> is
-          that a <b>Long Shot</b> is an <i>extension of a Full
-            Shot</i> with some leeway for wideness.
-          <a href='https://books.google.co.in/books?id=h8O2pJXpWa0C&lpg=PP1&pg=PA59#v=onepage&q&f=false' class="r-link ai-element ai-element_type2 ai-element3">
-            <span class="ai-element__label">Here</span>
-          </a>
-          is a more thorough definition.
-          This will be made
-          clearer with the examples shown below.
-        </p>
-
+        <br>
         <h5 id='data-sources'>Data Sources</h5>
         <ul>
 
@@ -2397,11 +2424,10 @@
           <a href='https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html' class="r-link ai-element ai-element_type2 ai-element3">
             <span class="ai-element__label">learning rate finder</span>
           </a>, etc).
-          I won't go into too much detail here as this is already
-          very well documented in
+          This is well documented in
           <a href='https://github.com/rsomani95/shot-type-classifier/blob/master/methodology.ipynb' class="r-link ai-element ai-element_type2 ai-element3">
-            <span class="ai-element__label">this Jupyter notebook</span>
-          </a>.
+            <span class="ai-element__label">this</span>
+          </a> Jupyter notebook.
 
         </p>
 
@@ -2409,8 +2435,8 @@
           The model used is a pretrained
           <a href='http://teleported.in/posts/decoding-resnet-architecture/?source=post_page' class="r-link ai-element ai-element_type2 ai-element3">
             <span class="ai-element__label"><code>ResNet-50</code></span>
-          </a> that was trained using fastai's best
-          practices, most of which are built into the library.
+          </a> trained using fastai's best
+          practices.
           The only part of the training process that I haven't seen used
           extensively, though mentioned in
           <a href='https://youtu.be/PW2HKkzdkKY?t=3030' class="r-link ai-element ai-element_type2 ai-element3">
