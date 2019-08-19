@@ -40,24 +40,6 @@
 
 <body>
 
-
-  <div class="row">
-    <div class="col">
-      <div class="collapse multi-collapse" id="multiCollapseExample1">
-        <div class="card card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="collapse multi-collapse" id="multiCollapseExample1">
-        <div class="card card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class='container-fluid post-cover'>
     <div class="juxtapose col-12">
       <img src="assets/img/cover/cover-after-revised.jpg" />
@@ -74,20 +56,57 @@
       <h5 class='col-12 text-center'>
         Rahul Somani, 10th August 2019
       </h5>
-      <br>
-      <br>
+
       <br>
     </div>
   </div>
 
+  <!-- Abstract -->
   <div class='container'>
+    <div class='row post-content'>
+      <div class='col-3'></div>
+      <div class='col-6'>
+        <p>
+          <br>
+          <span class='firstcharacter'>A</span>nalysing cinema is a time-consuming process. In the
+          cinematography domain alone, there's
+          a lot of factors to consider, such as shot scale, shot
+          composition, camera movement, color, lighting, etc.
+          Whatever you shoot is in some way influenced by what
+          you've watched. There's only so much one can watch, and
+          even lesser that one can analyse thoroughly.
+        </p>
+        <p class='text-standout'>
+          This is where neural networks offer ample promise. I've
+          developed a neural network that focuses on
+          one fundamental element of visual grammar:
+          <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">shot types</span>
+          </a>.
+          It's capable of recognising 6 unique shot types, and is
+          <i>~91% accurate</i>. The model, validation dataset (the set of
+          images used to determine its accuracy), code used to
+          train the network, and some more code to classify your own
+          images is available in
+          <a href='https://github.com/rsomani95/shot-type-classifier/' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">this</span>
+          </a>
+          GitHub repository.
+        </p>
+      </div>
+      <div class='col-3'></div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class='container choices'>
     <div class='row post-content'>
       <div class='col-2'></div>
       <div class='col-8 text-center'>
         <p>
-          <a class="btn btn-dark choice-btn" data-toggle="collapse" href="#vis-lang-intro" role="button" aria-expanded="true" aria-controls="vis-lang-intro">I'm new to visual language</a>
-          <a class="btn btn-dark choice-btn" data-toggle="collapse" href="#dl-basics" role="button" aria-expanded="true" aria-controls="dl-basics">I'm new to deep learning</a>
-
+          <a id='vislang-btn' class="btn btn-dark choice-btn" data-toggle="collapse" href="#vis-lang-intro" role="button" aria-expanded="true" aria-controls="vis-lang-intro">Hide the basics of visual language</a>
+          <a id='dl-btn' class="btn btn-dark choice-btn" data-toggle="collapse" href="#dl-basics" role="button" aria-expanded="true" aria-controls="dl-basics">Hide the basics of deep learning</a>
         </p>
       </div>
       <div class='col-2'></div>
@@ -627,57 +646,18 @@
           wishes to convey. These shots are then juxtaposed meaningfully
           to convey a coherent visual story.
         </p>
-      </div>
-
-      <div class='col-3'></div>
-    </div>
-  </div>
-
-  <div class='container'>
-    <div class='row post-content'>
-      <div class='col-3'></div>
-      <div class='col-6'>
-        <p class='collapse choice-collapse show' id='vis-lang-intro'>
-          Analysing cinema is a time-intensive process. The
-          analysis done above is far from comprehensive, but
-          hopefully gave you an idea of how intricate creating
-          effective cinema can be. As a filmmaker, whatever
-          you create is in some part influenced by what you've
-          watched. There's only so much one can watch, and even
-          lesser that one can analyse in-depth.
-        </p>
-        <p class='collapse choice-collapse' id='vis-lang-intro'>
-          <br>
-          <span class='firstcharacter'>A</span>nalysing cinema is a time-consuming process. In the
-          cinematography domain alone, there's
-          a lot of factors to consider, such as shot scale, shot
-          composition, camera movement, color, lighting, etc.
-          Whatever you shoot is in some way influenced by what
-          you've watched. There's only so much you can watch, and
-          even lesser that you can analyse thoroughly.
-        </p>
-        <p class='text-standout'>
-          This is where neural networks offer ample promise. I developed
-          a neural network that focuses on
-          one fundamental element of visual grammar:
-          <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#shot-size' class="r-link ai-element ai-element_type2 ai-element3">
-            <span class="ai-element__label">shot types</span>
-          </a>.
-          It's capable of recognising 6 unique shot types, and is
-          <i>~91% accurate</i>. The model, validation set (the set of
-          images used to determine its accuracy), code used to
-          train the network, and some more code to classify your own
-          images is available in
-          <a href='https://github.com/rsomani95/shot-type-classifier/' class="r-link ai-element ai-element_type2 ai-element3">
-            <span class="ai-element__label">this</span>
-          </a>
-          GitHub repository.
+        <p>
+          The analysis done above is far from comprehensive, but
+          (hopefully) shed light on how intricate creating
+          effective cinema can be.
         </p>
       </div>
 
       <div class='col-3'></div>
     </div>
   </div>
+
+
 
 
 
@@ -686,14 +666,12 @@
     <div class='row nn-101-writeup collapse choice-collapse show' id='dl-basics'>
       <div class='col-3' id='left-bar'></div>
       <div class='col-6' id='middle-bar'>
-        <h3 id='nn101' class='text-center'> Neural Networks 101
-          <small class="text-muted">(for the uninitiated)</small>
-        </h3>
+        <h3 id='nn101' class='text-center'> Neural Networks 101</h3>
         <br>
         <p>
-          "AI" is most often a buzzword for
-          "deep learning", the field that uses
-          "neural networks" to learn from data.
+          <i>'AI'</i> is most often a buzzword for
+          <i>deep learning</i>, the field that uses
+          <i>neural networks</i> to learn from data.
         </p>
         <p>
           The key idea is that instead of explicitly specifying patterns
@@ -704,7 +682,7 @@
           something unstructured, like images, audio clips,
           medical scans, or video. Neural networks are good at tasks like
           predicting
-          a customer's desired products, algorithmically differentiating
+          a customer's desired products, differentiating
           the image of a dog and a cat, the mating calls of dolphins
           and whales, a video of a goal being scored vs. the goalkeeper
           saving the day, or whether a tumor is benign or malignant.

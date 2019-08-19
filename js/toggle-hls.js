@@ -19,4 +19,16 @@ $(document).ready(function () {
     $('.choice-btn').click(function() {
       $(this).toggleClass('highlight').blur();
     });
+
+    $('#vislang-btn').click(function() {
+      $(this).text(function(i, v) {
+        return v === 'Show me the basics of visual language' ? 'Hide the basics of visual language' : 'Show me the basics of visual language'
+      });
+    });
+
+    $('#dl-btn').click(function() {
+      $(this).text(function(i, v) {
+        return v === 'Show me the basics of deep learning' ? 'Hide the basics of deep learning' : 'Show me the basics of deep learning'
+      });
+    });
 });
