@@ -80,17 +80,13 @@
           This is where neural networks offer ample promise. I've
           developed a neural network that focuses on
           one fundamental element of visual grammar:
-          <a href='#dataset' class="r-link ai-element ai-element_type2 ai-element3">
-            <span class="ai-element__label">shot types</span>
-          </a>.
+          <a href='#dataset'>shot types.</a>
           It's capable of recognising 6 unique shot types, and is
           <i>~91% accurate</i>. The model, validation dataset (the set of
           images used to determine its accuracy), code used to
           train the network, and some more code to classify your own
           images is available in
-          <a href='https://github.com/rsomani95/shot-type-classifier/' class="r-link ai-element ai-element_type2 ai-element3">
-            <span class="ai-element__label">this</span>
-          </a>
+          <a href='https://github.com/rsomani95/shot-type-classifier/'>this</a>
           GitHub repository.
         </p>
       </div>
@@ -2506,6 +2502,17 @@
         </p>
 
         <p>
+          While doing this project, I thought up and implemented a new kind
+          of data augmentation called
+          <a href='https://docs.fast.ai/vision.transform.html#_rgb_randomize' class="r-link ai-element ai-element_type2 ai-element3">
+            <span class="ai-element__label">
+              <code>rgb_randomize</code>
+            </span>
+          </a>
+          that is now part of the fastai library.
+        </p>
+
+        <p>
           The model architecture is a
           <a href='http://teleported.in/posts/decoding-resnet-architecture/?source=post_page' class="r-link ai-element ai-element_type2 ai-element3">
             <span class="ai-element__label"><code>ResNet-50</code></span>
@@ -2516,7 +2523,7 @@
             <span class="ai-element__label">this</span>
           </a> lecture,
           was that of <i>progressive image resizing</i> (perhaps <i>cyclical
-            transfer learning</i> is a better term). This is a process where
+            transfer learning</i> is a better term)*. This is a process where
           you take a pretrained model (almost always a <code>ResNet-xx</code>
           pretrained on <code>ImageNet</code>), fine-tune it on your dataset,
           and then repeat the process with a larger image size. Here's a
@@ -2525,21 +2532,10 @@
       </div>
       <div class='col-3 align-self-center' id='right-bar'>
         <p>
-          You cannot replicate the training process as the training
+          * You cannot replicate the training process as the training
           data has not been made public <i>yet</i>. However, you
           can use my pretrained model to predict shot types on your own
           images, or to re-evaluate the validation set.
-        </p>
-        <br>
-        <p>
-          While doing this project, I thought up and implemented a new kind
-          of data augmentation called
-          <a href='https://docs.fast.ai/vision.transform.html#_rgb_randomize' class="r-link ai-element ai-element_type2 ai-element3">
-            <span class="ai-element__label">
-              <code>rgb_randomize</code>
-            </span>
-          </a>
-          that is now part of the fastai library.
         </p>
       </div>
     </div>
@@ -3334,8 +3330,8 @@
           When sticking to single frame analysis, one could build
           classifiers for recognising
           <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#camera-focus' class="r-link ai-element ai-element_type2 ai-element3">
-            <span class="ai-element__label">camera focus</span>
-          </a>,
+            <span class="ai-element__label">camera focus,</span>
+          </a>
           <i>OTS (over-the-shoulder) shots</i>,
           <a href='https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/#camera-angles' class="r-link ai-element ai-element_type2 ai-element3">
             <span class="ai-element__label"><i>camera angles</i></span>

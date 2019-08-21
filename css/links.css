@@ -538,10 +538,10 @@ SETTINGS
 */
 
 .ai-element{
-	--aiElementLineWeight: 1px;
-	--aiElementLineColor: #243aab;
-	--aiElementColor: #1b255a; //#3F729B; //#0097E0; //#ef6c00; //
-	--aiElementColorHover: #243aab;
+	--aiElementLineWeight: 4px;
+	--aiElementLineColor: #85b9db;
+	--aiElementColor: #333333; //#3F729B; //#0097E0; //#ef6c00; //
+	--aiElementColorHover: #85b9db;
 }
 
 .ai-element_type1,

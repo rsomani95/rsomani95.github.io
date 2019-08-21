@@ -19,6 +19,24 @@ body {
   font-family: ;
 }
 
+.text-standout a {
+  color: #333333;
+  border-bottom: 4px solid #85b9db;
+}
+
+.text-standout a:hover {
+  text-decoration: none;
+}
+
+#dl-basics a {
+  color: #333333;
+  border-bottom: 4px solid #85b9db;
+}
+
+#dl-basics a:hover {
+  text-decoration: none;
+}
+
 /*
 .gif-group .stretch{
   padding-left: 0%;
