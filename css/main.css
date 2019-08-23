@@ -15,6 +15,10 @@
   background-color: rgb(200, 100, 100);
 }
 */
+hr {
+  padding-bottom: 4%;
+}
+
 body {
   font-family: ;
 }
@@ -327,9 +331,26 @@ height: 80vh;
   height: 100%;
 }
 
+.vimeo-table {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.vimeo-table .table-container {
+  display: inline;
+}
+
+.vimeo-table .table-container .table-responsive{
+  display: inline;
+}
+
+.vimeo-table .table-container .table td{
+  padding: 0.5rem;
+}
+
 #tdk-bank-analysis {
   text-align: center;
-  font-size: 12px;
+  font-size: 0.81em;
 }
 
 .col-5.video-embed {
