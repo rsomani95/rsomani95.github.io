@@ -472,3 +472,7 @@ height: 80vh;
   text-align: right;
   padding-right: 4%;
 }
+
+.cite-group {
+  overflow: visible;
+}
