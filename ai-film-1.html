@@ -274,7 +274,7 @@
               some context, a crew of two researchers and a pilot land on
               a mysterious planet to collect crucial data from the debris
               of a previous mission. This planet is very different from
-              Earth -- it is covered in an endless ocean, and its gravity
+              Earth —- it is covered in an endless ocean, and its gravity
               is 130% stronger than Earth's.
             </p>
           </div>
@@ -3646,6 +3646,20 @@
       <div class='col-6 cite-group' id='middle-bar'>
         <br>
         <ul>
+
+          <li>
+            <a href=https://arxiv.org/abs/1803.09820> <i>A disciplined approach to neural network hyper-parameters: Part 1 -- learning rate, batch size, momentum, and weight decay. </i></a>
+            Leslie N. Smith. arXiv 2018
+            <div class='cite-explain'>
+              This paper explains the <code>1cycle</code> policy
+              that enables fast training of complex neural network
+              architectures by optimal setting of hyperparameters.
+              It's also built in to the fastai library
+              in the <code>fit_one_cycle(...)</code> function
+            </div>
+          </li>
+
+
           <li>
             <a href='https://blog.slavv.com/a-gentle-intro-to-transfer-learning-2c0b674375a0'>
               <i>A Gentle Intro to Transfer Learning</i>
@@ -3695,6 +3709,14 @@
               An excerpt from Fastai's lecture explaining what cyclical
               transfer learning is. Jeremy Howard (the lecturer) calls it
               'progressive resizing'.
+            </div>
+          </li>
+
+          <li>
+            <a href=https://arxiv.org/abs/1705.08214> <i>Deep Residual Learning for Image Recognition. </i></a>
+            Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun. arXiv 2015
+            <div class='cite-explain'>
+              WRITE
             </div>
           </li>
 
@@ -3784,9 +3806,12 @@
             </a>
             Kensho Hara, Hirokatsu Kataoka, Yutaka Satoh. arXiv 2018
             <div class='cite-explain'>
-              WRITE.
-              code available <a href='https://github.com/kenshohara/3D-ResNets-PyTorch'>
-                here</a>
+              An excellent paper that extended the ResNet architecture
+              to the video domain. They released multiple models, and the best
+              ones come close to/ are better than the state of the art (varying
+              based on the dataset).
+              The code is available <a href='https://github.com/kenshohara/3D-ResNets-PyTorch'>
+                here</a>.
             </div>
           </li>
 
@@ -3807,9 +3832,12 @@
             </a>
             Shitao Tang, Litong Feng, Zhangkui Kuang, Yimin Chen, Wei Zhang. arXiv 2017
             <div class='cite-explain'>
-              WRITE.
-              Code available <a href='https://github.com/Tangshitao/ClipShots'>
-                here</a>
+              A more recent paper on SBD (shot boundary detection) that
+              introduced a complicated yet effective model and a more
+              sophisticated dataset -- ClipShots -- for cut detection.
+              Detects hard cuts and fades.
+              The code is available <a href='https://github.com/Tangshitao/ClipShots'>
+                here</a>.
             </div>
           </li>
 
@@ -3818,9 +3846,12 @@
             </a>
             Joao Carreira, Andrew Zisserman. arXiv 2017
             <div class='cite-explain'>
-              WRITE.
-              Code available <a href='https://github.com/deepmind/kinetics-i3d'>
-                here</a>
+              This paper introduced the <code>Kinetics</code> dataset,
+              which is a landmark dataset in the video domain, and introduces
+              a unique model (a combination of networks, to be precise) that
+              achieves state of the art performance in existing video datasets.
+              The code is available <a href='https://github.com/deepmind/kinetics-i3d'>
+                here</a>.
             </div>
           </li>
 
@@ -3829,7 +3860,9 @@
             </a>
             Michael Gygli. arXiv 2017
             <div class='cite-explain'>
-              WRITE
+              One of the first papers that used convolutional neural
+              networks to detect when a cut happened in a video, and
+              also the kind of cut -- hard cut or fade.
             </div>
           </li>
 
