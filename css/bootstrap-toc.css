@@ -3,6 +3,7 @@
   padding-top: 2em;
   border: 0;
   font-size: 1em;
+  color:white;
 }
 
 .list-group.list-group-root .list-group {
@@ -16,12 +17,9 @@
   padding-top: 5px;
   padding-bottom: 5px;
 
-  color:black;
-  border-left: 0.2em solid black;
-}
-
-.list-group.list-group-root>.list-group-item:first-child {
-  border-top-width: 0;
+  background-color: #111111;
+  color:#DDDDDD;
+  border-left: 0.2em solid #DDDDDD;
 }
 
 .list-group.list-group-root>.list-group>.list-group-item {
@@ -31,8 +29,9 @@
   padding-bottom: 3px;
   font-size: 0.9em;
 
-  color: #3C3C45;
-  border-left: 2.5px solid #3C3C45;
+  background-color: #111111;
+  color: #BBBBBB;
+  border-left: 2.5px solid #BBBBBB;
 }
 
 .list-group.list-group-root>.list-group>.list-group>.list-group-item {
@@ -42,6 +41,11 @@
   padding-bottom: 2px;
   font-size: 0.85em;
 
-  color: #4B5161;
-  border-left: 2px solid #4B5161;
+  background-color: #111111;
+  color: #a09d9d;
+  border-left: 2px solid #a09d9d;
+}
+
+.list-group.list-group-root>.list-group-item:first-child {
+  border-top-width: 0;
 }
