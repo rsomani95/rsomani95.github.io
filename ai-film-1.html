@@ -75,11 +75,11 @@
                 Abstract
               </a>
 
-              <a href="#vislang-intro" class="list-group-item">
+              <a href="#vislang-intro" class="list-group-item collapse choice-collapse show vis-lang-intro" id='vis-lang-intro'>
                 What is Visual Language?
               </a>
 
-              <a href="#nn101" class="list-group-item">
+              <a href="#nn101" class="list-group-item collapse choice-collapse show" id='dl-basics'>
                 Neural Networks 101
               </a>
 
@@ -191,7 +191,8 @@
           one fundamental element of visual grammar:
           <a href='#dataset'>shot types.</a>
           It's capable of recognising 6 unique shot types, and is
-          <i>~91% accurate</i>. The model, validation dataset (the set of
+          <i>~91% accurate</i>. The pretrained model, validation dataset
+          (the set of
           images used to determine its accuracy), code used to
           train the network, and some more code to classify your own
           images is freely available.
@@ -207,7 +208,7 @@
     <div class='row post-content'>
       <div class='col-12 text-center'>
         <p>
-          <a id='vislang-btn' class="btn btn-dark choice-btn" data-toggle="collapse" href="#vis-lang-intro" role="button" aria-expanded="true" aria-controls="vis-lang-intro">Hide the basics of visual language</a>
+          <a id='vislang-btn' class="btn btn-dark choice-btn" data-toggle="collapse" href=".vis-lang-intro" role="button" aria-expanded="true" aria-controls="vis-lang-intro">Hide the basics of visual language</a>
           <a id='code-btn' class="btn btn-dark" href="https://github.com/rsomani95/shot-type-classifier/" role="button">Take me to the code</a>
           <a id='dl-btn' class="btn btn-dark choice-btn" data-toggle="collapse" href="#dl-basics" role="button" aria-expanded="true" aria-controls="dl-basics">Hide the basics of deep learning</a>
         </p>
@@ -215,7 +216,7 @@
     </div>
   </div>
 
-  <div class='container gif-group post-header collapse choice-collapse show' id='vis-lang-intro'>
+  <div class='container gif-group post-header collapse choice-collapse show vis-lang-intro' id='vis-lang-intro'>
     <div class='row post-content' id='vislang-intro'>
       <div class='col-2'></div>
       <div class='col-8 text-center'>
@@ -795,9 +796,30 @@
     </div>
   </div>
 
+  <div class='container post-header collapse choice-collapse vis-lang-intro' id='vis-lang-intro'>
+    <div class='row'>
+      <div class='col-3' id='left-bar'></div>
+      <div class='col-6' id='middle-bar'>
+        <br>
+        <p>
+          What follows is a gentle introduction to
+          neural networks,
+          followed by a description of the dataset, methodology,
+          and results.
+          If you're not interested in reading <i>any</i>
+          of the (non-mathetical) technical material,
+          <a class ='text-standout' data-toggle="collapse" href=".hide-technical" id='hide-technical'>
+            click here.
+          </a>
+        </p>
+      </div>
+      <div class='col-3' id='right-bar'></div>
+    </div>
+  </div>
+
   <div class='container post-header'>
     <br>
-    <div class='row nn-101-writeup collapse choice-collapse show' id='dl-basics'>
+    <div class='row nn-101-writeup collapse choice-collapse show hide-technical' id='dl-basics'>
       <div class='col-3' id='left-bar'></div>
       <div class='col-6' id='middle-bar'>
         <h3 id='nn101' class='text-center'> Neural Networks 101</h3>
@@ -1050,7 +1072,15 @@
         <p class='text-center'><small>
             <b>Note:</b> All images are cropped to the same aspect ratio for
             a smooth viewing experience
-          </small></p>
+          </small>
+        </p>
+        <p class='text-center collapse choice-collapse vis-lang-intro' id='vislang-shot-type-pro-note'><small>
+            Though you're familiar with shot types, it's useful to look
+            at how <i>Long Shots</i> and <i>Wide Shots</i> are defined
+            here since unlike shots like <i>Extreme Close Ups</i>, these
+            are more subjective
+          </small>
+        </p>
       </div>
       <div class='col-3'></div>
     </div>
@@ -1058,7 +1088,7 @@
 
   <!-- Shot Types -->
   <div class='container'>
-    <div class='row shot-showcase' id='data-ews'>
+    <div class='row shot-showcase collapse choice-collapse show vis-lang-intro' id='data-ews'>
       <div class='col-2 align-self-center' id='left-bar'>
         <h6> Extreme Wide Shot </h6>
 
@@ -1434,7 +1464,7 @@
       </div>
     </div>
 
-    <div class='row shot-showcase' id='data-ms'>
+    <div class='row shot-showcase collapse choice-collapse show vis-lang-intro' id='data-ms'>
       <div class='col-2 align-self-center' id='left-bar'>
         <h6> Medium Shot </h6>
       </div>
@@ -1626,7 +1656,7 @@
       </div>
     </div>
 
-    <div class='row shot-showcase' id='data-mcu'>
+    <div class='row shot-showcase collapse choice-collapse show vis-lang-intro' id='data-mcu'>
       <div class='col-2 align-self-center' id='left-bar'>
         <h6> Medium Close Up </h6>
       </div>
@@ -1820,7 +1850,7 @@
       </div>
     </div>
 
-    <div class='row shot-showcase' id='data-cu'>
+    <div class='row shot-showcase collapse choice-collapse show vis-lang-intro' id='data-cu'>
       <div class='col-2 align-self-center' id='left-bar'>
         <h6> Close Up </h6>
       </div>
@@ -2013,7 +2043,7 @@
       </div>
     </div>
 
-    <div class='row shot-showcase' id='data-ecu'>
+    <div class='row shot-showcase collapse choice-collapse show vis-lang-intro' id='data-ecu'>
       <div class='col-2 align-self-center' id='left-bar'>
         <h6> Extreme Close Up </h6>
       </div>
@@ -2206,7 +2236,7 @@
     </div>
 
     <br>
-    <h4 class='text-center' id='data-fut'>
+    <h4 class='text-center collapse choice-collapse show vis-lang-intro' id='data-fut'>
       More Shot Types
       <small class="text-muted"> (Coming Soon)</small></h4>
 
@@ -2404,7 +2434,7 @@
       </div>
     </div>
 
-    <div class='row shot-showcase' id='data-fut-mls'>
+    <div class='row shot-showcase collapse choice-collapse show vis-lang-intro' id='data-fut-mls'>
       <div class='col-2 align-self-center' id='left-bar'>
         <h6> Medium Long Shot </h6>
       </div>
@@ -2611,7 +2641,7 @@
 
   <!-- Methodology -->
   <div class='container'>
-    <div class='row post-content methodology'>
+    <div class='row post-content methodology collapse choice-collapse show hide-technical'>
       <div class='col-3' id='left-bar'></div>
       <div class='col-6' id='middle-bar'>
         <h3 id='method' class='text-center'>Methodology</h3>
@@ -2679,7 +2709,7 @@
         </p>
       </div>
     </div>
-    <div class='row post-content'>
+    <div class='row post-content collapse choice-collapse show hide-technical'>
       <div class='col-10'>
         <img src='assets/svg/cyclical-transfer-learning.svg'>
       </div>
@@ -2705,7 +2735,7 @@
       <div class='col-3' id='right-bar'></div>
     </div>
 
-    <div class='row post-content' id='results-perf'>
+    <div class='row post-content collapse choice-collapse show hide-technical' id='results-perf'>
       <div class='col-3' id='left-bar'></div>
       <div class='col-6' id='middle-bar'>
         <h4> Training Performance </h3>
@@ -2737,7 +2767,7 @@
       <div class='col-3' id='right-bar'></div>
     </div>
 
-    <div class='row post-content training-summary'>
+    <div class='row post-content training-summary collapse choice-collapse show hide-technical'>
       <div class='col-3 align-self-center' id='left-bar'>
         <p class='text'>
           <b>Training Loss</b>: Lower is better as long as
@@ -2847,7 +2877,7 @@
       <div class='col-3' id='left-bar'></div>
       <div class='col-6' id='middle-bar'>
         <h4> Confusion Matrix </h4>
-        <p class='collapse choice-collapse show' id='dl-basics'>
+        <p class='collapse choice-collapse show hide-technical' id='dl-basics'>
           The first row of the confusion matrix below
           says that of 100 Extreme Wide Shots
           (EWS), 94 were predicted accurately, and of the 6
@@ -2866,6 +2896,7 @@
       <div class='col-3' id='left-bar'></div>
       <div class='col-6' id='middle-bar'>
         <img src='assets/svg/conf-matrix.svg'>
+        <br>
         <p>
           It's clear that
           the model performs best for Extreme Wide Shots
@@ -2873,6 +2904,9 @@
           and Extreme Close Ups (ECU). It struggles a bit
           when detecting Long Shots (LS), often confusing them
           with Medium Shots (MS).
+        </p>
+        <p class='collapse choice-collapse show hide-technical'>
+          Overall, the model is 91% accurate.
         </p>
       </div>
       <div class='col-3' id='right-bar'></div>

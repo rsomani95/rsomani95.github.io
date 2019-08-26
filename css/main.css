@@ -28,6 +28,11 @@ body {
   border-bottom: 4px solid #85b9db;
 }
 
+#hide-technical {
+  color: #C94C4C;
+  border-bottom: 4px solid #f9ccac;
+}
+
 .text-standout a:hover {
   text-decoration: none;
 }
@@ -425,6 +430,12 @@ height: 80vh;
   padding-right: 2.5%;
   padding-left: 2.5%;
 }
+
+#vislang-shot-type-pro-note {
+  line-height: 1.1;
+}
+
+
 
 .card a {
   color: black;
