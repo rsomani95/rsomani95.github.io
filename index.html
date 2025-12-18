@@ -12,75 +12,202 @@
   <link rel='stylesheet' href='css/main.css'>
   <link rel='stylesheet' href='css/bootstrap-toc.css'>
   <link rel='stylesheet' href='css/links.css'>
-  <!-- Optional Film Strip Scrollbar
-  <link rel='stylesheet' href='css/scrollbar.css'>
-  -->
-  <!-- Need to experiment with unminified version
-  <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
-  -->
 
+  <title>Rahul Somani - ML Researcher & Founder</title>
 
-  <title>Rahul's Blog</title>
+  <style>
+    .project-row {
+      margin-bottom: 5rem;
+    }
+    .placeholder-img {
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+      background-color: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      font-weight: 500;
+      border-radius: 4px;
+      border: 1px solid #dee2e6;
+      overflow: hidden;
+    }
+    .placeholder-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-section {
+      padding: 6rem 0 4rem;
+    }
+    .profile-placeholder {
+      width: 80px;
+      height: 80px;
+      background-color: #e9ecef;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #adb5bd;
+    }
+    .project-meta {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+    /* Ensure Juxtapose fits container */
+    .juxtapose {
+        width: 100%;
+    }
+  </style>
 </head>
 
 <body>
 
-
-
-
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Blog Posts
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="ai-film-1.html">AI For Filmmaking: Recognising Shot Types</a>
-            <!--<div class="dropdown-divider"></div>-->
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href=""></a>
-        </li>
-
-      </ul>
-    </div>
-    <div class="mx-auto order-0">
-      <a class="navbar-brand mx-auto" href="#"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Rahul Somani</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
       </button>
-    </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="about.html">About</a>
-        </li>
-      </ul>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Work <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <br><br><br><br>
+  <!-- Hero Section -->
+  <div class="container hero-section text-center">
+    <!-- <div class="profile-placeholder">
+      Photo
+    </div> -->
+    <!-- <h1 class="display-4 mb-3">Building next-gen video intelligence.</h1> -->
+    <p class="lead text-muted mb-4">
+      ML Practitioner & Founder specialized in building multimodal AI systems that help us unpack and understand visual storytelling.
+    </p>
+    <!-- <ul class="list-unstyled text-muted mb-4" style="max-width: 600px; margin: 0 auto; line-height: 1.8;">
+      <li class="mb-2">
+        <strong>2023 - Present:</strong> Co-Founder & Head of ML at OZU
+      </li>
+      <li class="mb-2">
+        <strong>2020 - 2022:</strong> Co-Founder & ML Researcher at Special Circumstances
+      </li>
+      <li class="mb-2">
+        <strong>2019:</strong> Independent Researcher
+      </li>
+    </ul> -->
 
-  <div class='container'>
-    <div class='row'>
-      <div class='col-7'>
-        <div class="juxtapose col-12">
-          <img src="assets/img/cover/cover-after-revised-ds.jpg" />
-          <img src="assets/img/cover/cover-before-ds.jpg" />
-        </div>
+    <!-- <div>
+      <a href="mailto:rsomani95@gmail.com" class="text-dark mx-2 font-weight-bold">Email</a>
+      <span class="text-muted">|</span>
+      <a href="https://github.com/rsomani95" class="text-dark mx-2 font-weight-bold">GitHub</a>
+      <span class="text-muted">|</span>
+      <a href="https://www.linkedin.com/in/rsomani95/" class="text-dark mx-2 font-weight-bold">LinkedIn</a>
+    </div> -->
+  </div>
+
+  <!-- <div>
+    <p></p>
+    <br>
+  </div> -->
+
+  <div class='container mb-5'>
+    
+    <!-- OZU -->
+    <div class='row project-row align-items-center'>
+      <div class='col-md-7 mb-3 mb-md-0'>
+        <a href="https://ozu.ai/" target="_blank" rel="noopener noreferrer">
+          <div class="placeholder-img">
+              <img src="assets/img/ozu/ozu-posters-2.jpg">
+          </div>
+        </a>
       </div>
-      <div class='col-5 align-self-center'>
-        <h4 class='text-standout'><a href='ai-film-1.html'>
-          A.I. for Filmmaking
-        </a></h4>
+      <div class='col-md-5'>
+        <!-- <div class="project-meta text-muted">Co-Founder, Head of ML</div> -->
+        <h3 class='text-standout mb-3'><a href='http://ozu.ai/'>
+          OZU
+        </a></h3>
         <p>
-          This post introduces the basics of visual
-          language and a neural network
-          that recognises cinema shot-types.
+          A celebration of film, OZU is a platform for people to discover and explore stories. I'm the co-founder and head of ML.
+          We're building narrative intelligence to understand stories at scale. 
+        </p>
       </div>
     </div>
+
+    <!-- The Orbit -->
+    <div class='row project-row align-items-center'>
+      <div class='col-md-7 mb-3 mb-md-0'>
+        <div class="placeholder-img">
+          <a href="https://special-circumstances.medium.com/hbo-max-the-orbit-201d59fc5f51" target="_blank" rel="noopener noreferrer">
+            <img src="assets/img/hbo/hbomax-the-orbit.jpg">
+          </a>
+        </div>
+      </div>
+      <div class='col-md-5'>
+        <!-- <div class="project-meta text-muted">HBO Max</div> -->
+        <h3 class='text-standout mb-3'><a href='https://special-circumstances.medium.com/hbo-max-the-orbit-201d59fc5f51'>
+          HBO Max -"The Orbit"
+        </a></h3>
+        <p>
+          A flagship interactive retail experience for HBO Max & AT&T, in collaboration with HUSH, where users could interact
+          with parts of the HBO archive in real-time with gestures and words.
+        </p>
+      </div>
+    </div>
+
+    <!-- Infinite Bad Guy -->
+    <div class='row project-row align-items-center'>
+      <div class='col-md-7 mb-3 mb-md-0'>
+        <div class="placeholder-img">
+          <a href="https://special-circumstances.medium.com/infinite-bad-guy-ac7a773eadb6" target="_blank" rel="noopener noreferrer">
+            <img src="assets/img/infinite-bad-guy/youtube-billie-eilish-infinite-bad-guy.jpg">
+          </a>
+        </div>
+      </div>
+      <div class='col-md-5'>
+        <!-- <div class="project-meta text-muted">Google / YouTube</div> -->
+        <h3 class='text-standout mb-3'><a href='https://special-circumstances.medium.com/infinite-bad-guy-ac7a773eadb6'>
+          Infinite Bad Guy
+        </a></h3>
+        <p>
+          A collaborative project with IYOIYO studio / Google & YouTube.
+          I built custom vision models that helped power the visual intelligence behind the experience.
+        </p>
+      </div>
+    </div>
+
+    <!-- Shot Type Classification -->
+    <div class='row project-row align-items-center'>
+      <div class='col-md-7 mb-3 mb-md-0'>
+        <div class="juxtapose">
+          <img src="assets/img/cover/cover-after-revised-ds.jpg"/>
+          <img src="assets/img/cover/cover-before-ds.jpg"/>
+        </div>
+      </div>
+      <div class='col-md-5'>
+        <!-- <div class="project-meta text-muted">Independent Research</div> -->
+        <h3 class='text-standout mb-3'><a href='ai-film-1.html'>
+          A.I. for Filmmaking - Recognising Shot Types
+        </a></h3>
+        <p>
+          Blog post introducing the basics of visual language in cinema, and a custom model and dataset built
+          to recognise different types of framing.
+        </p>
+      </div>
+    </div>
+
   </div>
 
 
@@ -90,3 +217,5 @@
   <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
 
 </body>
+
+</html>
