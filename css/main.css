@@ -487,3 +487,43 @@ height: 80vh;
 .cite-group {
   overflow: visible;
 }
+
+/* Social Links Panel */
+.social-links-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 2rem 0;
+  margin-top: 2rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 2rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.social-link:hover {
+  color: #4b5563;
+  text-decoration: none;
+}
+
+.social-link i {
+  transition: color 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .social-links-panel {
+    gap: 2rem;
+  }
+  
+  .social-link {
+    font-size: 1.5rem;
+  }
+}
+
