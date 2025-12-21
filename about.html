@@ -52,17 +52,16 @@
   <br>
 
   <div class='container'>
-    <div class='row'>
-      <div class='col-3'></div>
-      <div class='col-6 align-self-center'>
-        <figure class='figure'>
-          <img src='assets/img/me/prof-pic-small.jpg' class="figure-img img-fluid rounded">
+    <div class='row align-items-center' style='padding-top: 2rem;'>
+      <!-- Image column - 30% width, right-aligned to close gap -->
+      <div class='col-md-4 text-right d-flex align-items-center justify-content-end'>
+        <figure class='figure mb-0'>
+          <img src='assets/img/me/prof-pic-small.jpg' class="figure-img img-fluid rounded mb-0" style="max-width: 200px;">
         </figure>
       </div>
-      <div class='col-3'></div>
 
-      <div class='col-3'></div>
-      <div class='col-6 align-self-center about-me' style='font-size: 1rem;'>
+      <!-- Text column - 70% width -->
+      <div class='col-md-6 about-me' style='font-size: 1rem;'>
         <p>
           I spent hours analyzing a single three-minute scene from Pulp Fiction for a film-analysis class in college.
           Wondering if machines could help with that kind of analysis is what pulled me into programming and ML in 2019.
@@ -78,8 +77,14 @@
           <a href="https://www.youtube.com/watch?v=NZNI0avIb3Y" target="_blank" rel="noopener noreferrer"><i>Normal</i></a>) 
             and composed the soundtrack for the former.
         </p>
+      </div>
+    </div>
 
-        <div class="social-links-panel">
+    <!-- Social links in separate row -->
+    <div class='row'>
+      <div class='col-md-4'></div>
+      <div class='col-md-6'>
+        <div class="social-links-panel" style="justify-content: flex-start; margin-top: 1rem;">
           <a href='mailto:rsomani95@gmail.com' class="social-link" title="Email">
             <i class="fas fa-envelope"></i>
           </a>
@@ -93,11 +98,7 @@
             <i class="fab fa-linkedin-in"></i>
           </a>
         </div>
-
       </div>
-      <div class='col-3'></div>
-
-
     </div>
   </div>
 
