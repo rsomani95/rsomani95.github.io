@@ -14,7 +14,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <title>HBO Max - The Orbit | Rahul Somani</title>
+  <title>Infinite Bad Guy | Rahul Somani</title>
 </head>
 
 <body>
@@ -39,35 +39,22 @@
   </nav>
 
   <div class="project-header">
-    <h1>HBO Max - "The Orbit"</h1>
-    <div class="subtitle">Special Circumstances × HUSH - 2021</div>
+    <h1>Infinite Bad Guy</h1>
+    <div class="subtitle">Special Circumstances × IYOIYO × Google & YouTube - 2020</div>
   </div>
 
-  <img src="assets/img/hbo/hbomax-the-orbit.jpg" alt="HBO Max The Orbit" class="project-image">
+  <img src="assets/img/infinite-bad-guy/youtube-billie-eilish-infinite-bad-guy.jpg" alt="Infinite Bad Guy" class="project-image">
 
   <div class="content-section">
     <p>
-      Worked on building automated systems that selected diverse, relevant, and 
-      important scenes from the HBO archive that were bubbled up to the interactive front end. My specific contributions were:
+      Built early versions of the collection of datasets and models that eventually became <a href="https://www.youtube.com/live/7aYgLALc_24?si=EMipJJD2R7R3ADTI&t=33136"  class="external-link" target="_blank" rel="noopener noreferrer">CinemaNet</a> using the PyTorch based fastai framework.
+      At the time, ImageNet based models were the state-of-the-art for generating image embeddings, but these simply didn't transfer well to this domain. The model I trained was better
+      suited for the task as it understood visual nuances of cinematography and produced better embeddings and tags. This was then used to power the
+      algorithms that chunked up UGC into atomic blocks that could be put together seamlessly for the end user experience.
     </p>
 
-    <ul>
-        <li>Created a custom architecture with a shared backbone that jointly optimised for all the tasks. 
-          Having a shared backbone not only reduced inference costs, but also led to superior performance than individual models for all 
-          the tasks due to the shared representation created by the joint optimisation</li>
-        <li>Wrote custom training loops to fine-tune the model efficiently. Tricks used included gradual unfreezing,
-          gradient accumulation, custom data augmentation, etc. </li>
-        <li>Improved our in-house datasets for recognising lighting, color, framing, location and composition cues more robustly</li>
-        <li>Built a custom NSFW classification dataset tailored to the HBO archive</li>
-        <li>Heuristics on top of model outputs to understand edit structure, build a robust set of criteria to filter out irrelevant scenes</li>
-        <li>Helped brainstorm with the larger team on models and tools for downstream analysis of dialogue and facial keypoints</li>
-        <li>Optimised model with ONNXRuntime to analyse near petabyte scale archive run on AWS</li>
-    </ul>
-
-    <!-- https://vimeo.com/554783346?fl=pl&fe=cm -->
-
     <p>
-      Learn more about the project <a href="https://special-circumstances.medium.com/hbo-max-the-orbit-201d59fc5f51" class="external-link" target="_blank" rel="noopener noreferrer">in this blog post</a>.
+      Learn more about the project <a href="https://special-circumstances.medium.com/infinite-bad-guy-ac7a773eadb6" class="external-link" target="_blank" rel="noopener noreferrer">in this blog post</a>.
     </p>
   </div>
 
@@ -100,4 +87,5 @@
 </body>
 
 </html>
+
 
