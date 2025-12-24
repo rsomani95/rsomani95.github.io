@@ -84,15 +84,20 @@
   <div class="content-section">
     <p>
       Worked on building automated systems that selected diverse, relevant, and 
-      important scenes from the HBO archive that were bubbled up to the interactive front end. More specifically:
+      important scenes from the HBO archive that were bubbled up to the interactive front end. My specific contributions were:
     </p>
 
     <ul>
-      <li>Custom models to recognise lighting, color, framing, location and composition cues</li>
-      <li>Custom NSFW classifier and dataset tailored to the HBO archive to ensure no inappropriate content was displayed to the user</li>
-      <li>Heuristics on top of model outputs to understand edit structure, build a robust set of criteria to filter out irrelevant scenes</li>
-      <li>Helped brainstorm with the larger team on models and tools for downstream analysis of dialogue and facial keypoints</li>
-      <li>Optimised model with ONNXRuntime to analyse near petabyte scale archive run on AWS</li>
+        <li>Created a custom architecture with a shared backbone that jointly optimised for all the tasks. 
+          Having a shared backbone not only reduced inference costs, but also led to superior performance than individual models for all 
+          the tasks due to the shared representation created by the joint optimisation</li>
+        <li>Wrote custom training loops to fine-tune the model efficiently. Tricks used included gradual unfreezing,
+          gradient accumulation, custom data augmentation, etc. </li>
+        <li>Improved our in-house datasets for recognising lighting, color, framing, location and composition cues more robustly</li>
+        <li>Built a custom NSFW classification dataset tailored to the HBO archive</li>
+        <li>Heuristics on top of model outputs to understand edit structure, build a robust set of criteria to filter out irrelevant scenes</li>
+        <li>Helped brainstorm with the larger team on models and tools for downstream analysis of dialogue and facial keypoints</li>
+        <li>Optimised model with ONNXRuntime to analyse near petabyte scale archive run on AWS</li>
     </ul>
 
     <!-- https://vimeo.com/554783346?fl=pl&fe=cm -->
