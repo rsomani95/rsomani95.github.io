@@ -527,3 +527,44 @@ height: 80vh;
   }
 }
 
+/* Project Page Styles */
+.project-header {
+  max-width: 650px;
+  margin: 3rem auto 2rem;
+  padding: 0 15px;
+}
+
+.project-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.project-header .subtitle {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+.project-image {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto 1.5rem;
+  display: block;
+}
+
+.content-section {
+  max-width: 650px;
+  margin: 0 auto 3rem;
+  padding: 0 15px;
+}
+
+.content-section p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.external-link {
+  color: #2966a7;
+  text-decoration: underline;
+}
+
