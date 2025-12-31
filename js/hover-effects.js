@@ -27,3 +27,27 @@ document.querySelectorAll('.video-hover-container').forEach(function(container) 
   });
 });
 
+// Autoplay video with pause/play toggle and seamless looping
+document.querySelectorAll('.video-autoplay-container').forEach(function(container) {
+  var video = container.querySelector('video');
+  var btn = container.querySelector('.video-pause-btn');
+  if (!video || !btn) return;
+  
+  // Seamless loop: reset video slightly before it ends to avoid black frame
+  video.addEventListener('timeupdate', function() {
+    // Reset 0.1 seconds before end to create seamless loop
+    if (video.duration && video.currentTime >= video.duration - 0.1) {
+      video.currentTime = 0;
+    }
+  });
+  
+  btn.addEventListener('click', function() {
+    if (video.paused) {
+      video.play();
+      btn.classList.remove('paused');
+    } else {
+      video.pause();
+      btn.classList.add('paused');
+    }
+  });
+});

@@ -66,3 +66,55 @@
   opacity: 1;
 }
 
+/* Autoplay video with pause control */
+.video-autoplay-container {
+  position: relative;
+  width: 100%;
+  background: #f8f9fa;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}
+.video-autoplay-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+.video-autoplay-container .video-pause-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  z-index: 10;
+}
+.video-autoplay-container:hover .video-pause-btn {
+  opacity: 1;
+}
+.video-autoplay-container .video-pause-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+.video-autoplay-container .video-pause-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+}
+.video-autoplay-container .video-pause-btn .play-icon {
+  display: none;
+}
+.video-autoplay-container .video-pause-btn.paused .pause-icon {
+  display: none;
+}
+.video-autoplay-container .video-pause-btn.paused .play-icon {
+  display: block;
+}
