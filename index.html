@@ -15,6 +15,7 @@
   <link rel='stylesheet' href='css/main.css'>
   <link rel='stylesheet' href='css/bootstrap-toc.css'>
   <link rel='stylesheet' href='css/links.css'>
+  <link rel='stylesheet' href='css/hover-effects.css'>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -68,68 +69,6 @@
     /* Ensure Juxtapose fits container */
     .juxtapose {
         width: 100%;
-    }
-    
-    /* GIF hover effect */
-    .gif-hover-container a {
-      position: relative;
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-    .gif-hover-container .gif-hover-static {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: opacity 0.15s ease;
-    }
-    .gif-hover-container .gif-hover-animated {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
-    .gif-hover-container:hover .gif-hover-static {
-      opacity: 0;
-    }
-    .gif-hover-container:hover .gif-hover-animated {
-      opacity: 1;
-    }
-    
-    /* Video hover effect */
-    .video-hover-container a {
-      position: relative;
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-    .video-hover-container .video-hover-static {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: opacity 0.15s ease;
-    }
-    .video-hover-container .video-hover-animated {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
-    .video-hover-container:hover .video-hover-static {
-      opacity: 0;
-    }
-    .video-hover-container:hover .video-hover-animated {
-      opacity: 1;
     }
   </style>
 </head>
@@ -316,35 +255,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
-  
-  <script>
-    // Restart GIF animation on hover
-    document.querySelectorAll('.gif-hover-container').forEach(function(container) {
-      var gif = container.querySelector('.gif-hover-animated');
-      var originalSrc = gif.src;
-      
-      container.addEventListener('mouseenter', function() {
-        // Reset the GIF to restart animation
-        gif.src = '';
-        gif.src = originalSrc;
-      });
-    });
-    
-    // Play/pause video on hover
-    document.querySelectorAll('.video-hover-container').forEach(function(container) {
-      var video = container.querySelector('.video-hover-animated');
-      
-      container.addEventListener('mouseenter', function() {
-        video.currentTime = 0;
-        video.play();
-      });
-      
-      container.addEventListener('mouseleave', function() {
-        video.pause();
-        video.currentTime = 0;
-      });
-    });
-  </script>
+  <script src="js/hover-effects.js"></script>
 
 </body>
 
