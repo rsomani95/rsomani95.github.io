@@ -14,10 +14,82 @@
   <link rel='stylesheet' href='css/main.css'>
   <link rel='stylesheet' href='css/bootstrap-toc.css'>
   <link rel='stylesheet' href='css/links.css'>
+  <link rel='stylesheet' href='css/hover-effects.css'>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <title>HBO Max - The Orbit | Rahul Somani</title>
+  <style>
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #000;
+      cursor: pointer;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* Allow clicks to pass through to wrapper */
+    }
+    .video-controls {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+    }
+    .video-control-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.15s ease;
+      font-size: 14px;
+    }
+    .video-control-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+      transform: scale(1.1);
+    }
+    .play-pause-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+    .play-pause-overlay.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .play-pause-overlay.hide {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+  </style>
 </head>
 
 <body>
@@ -46,9 +118,42 @@
     <div class="subtitle">Special Circumstances × HUSH - 2021</div>
   </div>
 
-  <img src="assets/img/hbo/hbomax-the-orbit.jpg" alt="HBO Max The Orbit" class="project-image">
+  <!-- <img src="assets/img/hbo/hbomax-the-orbit.jpg" alt="HBO Max The Orbit" class="project-image"> -->
+
+  <div class="container" style="max-width: 1000px; margin: 0 auto 3rem; padding: 0 15px;">
+    <div class="row align-items-center">
+      <div class="col-md-7 mb-4 mb-md-0">
+          <div class="video-wrapper" id="video-wrapper">
+            <iframe id="vimeo-player" src="https://player.vimeo.com/video/554783346?autoplay=1&amp;muted=1&amp;loop=1&amp;color=fff&amp;title=0&amp;byline=0&amp;portrait=0&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            <div class="video-controls">
+              <button class="video-control-btn" id="mute-btn" title="Unmute">
+                <i class="fas fa-volume-mute"></i>
+              </button>
+            </div>
+            <div class="play-pause-overlay" id="play-pause-overlay">
+              <i class="fas fa-pause"></i>
+            </div>
+          </div>
+      </div>
+      <div class="col-md-5">
+        <p style="line-height: 1.6; margin-bottom: 1rem; font-size: 1rem; margin-top: 1rem;">
+          The Orbit
+          is an interactive retail experience created by HUSH for HBO Max, deployed in AT&T flagship stores.
+          It used machine learning to let visitors explore over 85,000 clips from HBO's content library
+          through body movements and voice commands
+        </p>
+        <p>
+          The project won the <b><a
+              href="https://www.webbyawards.com/crafted-with-code/hbo-max-orbit/"
+              class="external-link" target="_blank" rel="noopener noreferrer">2022 Webby Award</a></b> for <i>Best Responsive/Adaptive Design for Mobile</i> (People's Voice).
+        </p>
+      </div>
+    </div>
+  </div>
 
   <div class="content-section">
+    <hr>
+    <h4>Role</h4>
     <p>
       Built automated systems that surfaced diverse, relevant scenes from HBO's near-petabyte archive
       to the interactive front end. Designed a custom multi-task architecture with a shared backbone
@@ -58,10 +163,13 @@
       for large-scale processing on AWS.
     </p>
 
-    <!-- https://vimeo.com/554783346?fl=pl&fe=cm -->
+    <p>
+      Also did technical discovery alongside the rest of the team to identify strategies for effective keypoint and
+      face recognition pipelines.
+    </p>
 
     <p>
-      Learn more about the project <a href="https://special-circumstances.medium.com/hbo-max-the-orbit-201d59fc5f51" class="external-link" target="_blank" rel="noopener noreferrer">in this blog post</a>.
+      Learn more about the technical details <a href="https://special-circumstances.medium.com/hbo-max-the-orbit-201d59fc5f51" class="external-link" target="_blank" rel="noopener noreferrer">in this blog post</a>.
     </p>
   </div>
 
@@ -90,6 +198,72 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="js/hover-effects.js"></script>
+
+  <!-- Vimeo Player SDK -->
+  <script src="https://player.vimeo.com/api/player.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const iframe = document.getElementById('vimeo-player');
+      const player = new Vimeo.Player(iframe);
+      const muteBtn = document.getElementById('mute-btn');
+      const videoWrapper = document.getElementById('video-wrapper');
+      const playPauseOverlay = document.getElementById('play-pause-overlay');
+      
+      let isMuted = true;
+      let isPlaying = true;
+      let overlayTimeout;
+      
+      // Ensure video starts muted
+      player.setMuted(true);
+      
+      // Mute/Unmute button
+      muteBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        isMuted = !isMuted;
+        player.setMuted(isMuted);
+        muteBtn.innerHTML = isMuted 
+          ? '<i class="fas fa-volume-mute"></i>' 
+          : '<i class="fas fa-volume-up"></i>';
+        muteBtn.title = isMuted ? 'Unmute' : 'Mute';
+      });
+      
+      // Click on video wrapper to play/pause
+      videoWrapper.addEventListener('click', function(e) {
+        if (e.target.closest('.video-control-btn')) return;
+        
+        if (isPlaying) {
+          player.pause();
+        } else {
+          player.play();
+        }
+      });
+      
+      // Show overlay feedback
+      function showOverlay(icon) {
+        clearTimeout(overlayTimeout);
+        playPauseOverlay.innerHTML = `<i class="fas fa-${icon}"></i>`;
+        playPauseOverlay.classList.remove('hide');
+        playPauseOverlay.classList.add('show');
+        
+        overlayTimeout = setTimeout(function() {
+          playPauseOverlay.classList.remove('show');
+          playPauseOverlay.classList.add('hide');
+        }, 400);
+      }
+      
+      // Listen for play/pause events
+      player.on('play', function() {
+        isPlaying = true;
+        showOverlay('play');
+      });
+      
+      player.on('pause', function() {
+        isPlaying = false;
+        showOverlay('pause');
+      });
+    });
+  </script>
 
 </body>
 
