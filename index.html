@@ -69,6 +69,37 @@
     .juxtapose {
         width: 100%;
     }
+    
+    /* GIF hover effect */
+    .gif-hover-container a {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .gif-hover-container .gif-hover-static {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.15s ease;
+    }
+    .gif-hover-container .gif-hover-animated {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+    .gif-hover-container:hover .gif-hover-static {
+      opacity: 0;
+    }
+    .gif-hover-container:hover .gif-hover-animated {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -123,7 +154,8 @@
       <div class='col-md-7 mb-3 mb-md-0'>
         <a href="ozu.html">
           <div class="placeholder-img">
-              <img src="assets/img/ozu/ozu-posters-2.jpg">
+              <!-- <img src="assets/img/ozu/ozu-posters-2.jpg"> -->
+              <img src="assets/img/ozu/ozu-hero-video-web.mp4">
           </div>
         </a>
       </div>
@@ -152,7 +184,7 @@
       </div>
       <div class='col-md-5'>
         <!-- <div class="project-meta text-muted">HBO Max</div> -->
-        <h3 class='text-standout mb-3'><a href='https://www.youtube.com/live/7aYgLALc_24?si=EMipJJD2R7R3ADTI&t=33136'>
+        <h3 class='text-standout mb-3'><a href='https://www.youtube.com/live/7aYgLALc_24?si=EMipJJD2R7R3ADTI&t=33136' target="_blank" rel="noopener noreferrer">
           CVEU Industry Spotlight
         </a></h3>
         <p>
@@ -186,9 +218,10 @@
     <!-- Infinite Bad Guy -->
     <div class='row project-row align-items-center'>
       <div class='col-md-7 mb-3 mb-md-0'>
-        <div class="placeholder-img">
+        <div class="placeholder-img gif-hover-container">
           <a href="infinite-bad-guy.html">
-            <img src="assets/img/infinite-bad-guy/youtube-billie-eilish-infinite-bad-guy.jpg">
+            <img class="gif-hover-static" src="assets/img/infinite-bad-guy/youtube-billie-eilish-infinite-bad-guy.jpg">
+            <img class="gif-hover-animated" src="assets/img/infinite-bad-guy/infinite-bad-guy.gif">
           </a>
         </div>
       </div>
@@ -252,6 +285,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+  
+  <script>
+    // Restart GIF animation on hover
+    document.querySelectorAll('.gif-hover-container').forEach(function(container) {
+      var gif = container.querySelector('.gif-hover-animated');
+      var originalSrc = gif.src;
+      
+      container.addEventListener('mouseenter', function() {
+        // Reset the GIF to restart animation
+        gif.src = '';
+        gif.src = originalSrc;
+      });
+    });
+  </script>
 
 </body>
 
