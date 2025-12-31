@@ -100,6 +100,37 @@
     .gif-hover-container:hover .gif-hover-animated {
       opacity: 1;
     }
+    
+    /* Video hover effect */
+    .video-hover-container a {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .video-hover-container .video-hover-static {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.15s ease;
+    }
+    .video-hover-container .video-hover-animated {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+    .video-hover-container:hover .video-hover-static {
+      opacity: 0;
+    }
+    .video-hover-container:hover .video-hover-animated {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -152,12 +183,12 @@
     <!-- OZU -->
     <div class='row project-row align-items-center'>
       <div class='col-md-7 mb-3 mb-md-0'>
-        <a href="ozu.html">
-          <div class="placeholder-img">
-              <!-- <img src="assets/img/ozu/ozu-posters-2.jpg"> -->
-              <img src="assets/img/ozu/ozu-hero-video-web.mp4">
-          </div>
-        </a>
+        <div class="placeholder-img video-hover-container">
+          <a href="ozu.html">
+            <img class="video-hover-static" src="assets/img/ozu/ozu-hero-video-poster.jpg">
+            <video class="video-hover-animated" src="assets/img/ozu/ozu-hero-video-web.mp4" muted loop playsinline></video>
+          </a>
+        </div>
       </div>
       <div class='col-md-5'>
         <!-- <div class="project-meta text-muted">Co-Founder, Head of ML</div> -->
@@ -296,6 +327,21 @@
         // Reset the GIF to restart animation
         gif.src = '';
         gif.src = originalSrc;
+      });
+    });
+    
+    // Play/pause video on hover
+    document.querySelectorAll('.video-hover-container').forEach(function(container) {
+      var video = container.querySelector('.video-hover-animated');
+      
+      container.addEventListener('mouseenter', function() {
+        video.currentTime = 0;
+        video.play();
+      });
+      
+      container.addEventListener('mouseleave', function() {
+        video.pause();
+        video.currentTime = 0;
       });
     });
   </script>
