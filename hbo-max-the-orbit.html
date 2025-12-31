@@ -89,6 +89,10 @@
       opacity: 0;
       transform: translate(-50%, -50%) scale(0.8);
     }
+    .play-pause-overlay.show-persistent {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
   </style>
 </head>
 
@@ -171,6 +175,39 @@
     <p>
       Learn more about the technical details <a href="https://special-circumstances.medium.com/hbo-max-the-orbit-201d59fc5f51" class="external-link" target="_blank" rel="noopener noreferrer">in this blog post</a>.
     </p>
+    <br>
+    <hr>
+  </div>
+
+  <div class="container" style="max-width: 1200px;">
+    <div class="row">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <div class="video-wrapper" id="video-wrapper-1">
+          <iframe id="vimeo-player-1" src="https://player.vimeo.com/video/751772283?autoplay=0&amp;muted=0&amp;loop=1&amp;color=fff&amp;title=0&amp;byline=0&amp;portrait=0&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          <div class="video-controls">
+            <button class="video-control-btn mute-btn" data-player="1" title="Mute">
+              <i class="fas fa-volume-up"></i>
+            </button>
+          </div>
+          <div class="play-pause-overlay show-persistent" id="play-pause-overlay-1">
+            <i class="fas fa-play"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="video-wrapper" id="video-wrapper-2">
+          <iframe id="vimeo-player-2" src="https://player.vimeo.com/video/751768407?autoplay=0&amp;muted=1&amp;loop=1&amp;color=fff&amp;title=0&amp;byline=0&amp;portrait=0&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          <div class="video-controls">
+            <button class="video-control-btn mute-btn" data-player="2" title="Mute">
+              <i class="fas fa-volume-up"></i>
+            </button>
+          </div>
+          <div class="play-pause-overlay show-persistent" id="play-pause-overlay-2">
+            <i class="fas fa-play"></i>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Social Links Footer -->
@@ -204,6 +241,7 @@
   <script src="https://player.vimeo.com/api/player.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Setup for hero video
       const iframe = document.getElementById('vimeo-player');
       const player = new Vimeo.Player(iframe);
       const muteBtn = document.getElementById('mute-btn');
@@ -262,6 +300,72 @@
         isPlaying = false;
         showOverlay('pause');
       });
+
+      // Setup for the two side-by-side videos (no autoplay)
+      function setupVideoPlayer(playerId) {
+        const iframe = document.getElementById('vimeo-player-' + playerId);
+        if (!iframe) return;
+        
+        const player = new Vimeo.Player(iframe);
+        const videoWrapper = document.getElementById('video-wrapper-' + playerId);
+        const playPauseOverlay = document.getElementById('play-pause-overlay-' + playerId);
+        const muteBtn = document.querySelector('.mute-btn[data-player="' + playerId + '"]');
+        
+        let isMuted = false; // Start unmuted
+        let isPlaying = false; // Start paused
+        let overlayTimeout;
+        let hasStarted = false; // Track if video has been started
+        
+        player.setMuted(false);
+        
+        muteBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          isMuted = !isMuted;
+          player.setMuted(isMuted);
+          muteBtn.innerHTML = isMuted 
+            ? '<i class="fas fa-volume-mute"></i>' 
+            : '<i class="fas fa-volume-up"></i>';
+          muteBtn.title = isMuted ? 'Unmute' : 'Mute';
+        });
+        
+        videoWrapper.addEventListener('click', function(e) {
+          if (e.target.closest('.video-control-btn')) return;
+          
+          if (isPlaying) {
+            player.pause();
+          } else {
+            player.play();
+          }
+        });
+        
+        function showOverlayForPlayer(icon) {
+          clearTimeout(overlayTimeout);
+          playPauseOverlay.innerHTML = '<i class="fas fa-' + icon + '"></i>';
+          playPauseOverlay.classList.remove('hide', 'show-persistent');
+          playPauseOverlay.classList.add('show');
+          
+          overlayTimeout = setTimeout(function() {
+            playPauseOverlay.classList.remove('show');
+            playPauseOverlay.classList.add('hide');
+          }, 400);
+        }
+        
+        player.on('play', function() {
+          isPlaying = true;
+          hasStarted = true;
+          playPauseOverlay.classList.remove('show-persistent'); // Remove persistent overlay
+          showOverlayForPlayer('play');
+        });
+        
+        player.on('pause', function() {
+          isPlaying = false;
+          showOverlayForPlayer('pause');
+        });
+      }
+      
+      // Initialize the two additional video players
+      setupVideoPlayer('1');
+      setupVideoPlayer('2');
     });
   </script>
 
