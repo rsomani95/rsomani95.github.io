@@ -35,6 +35,8 @@
 /* Video hover effect */
 .video-hover-container {
   position: relative;
+  border-radius: 4px;
+  overflow: hidden;
 }
 .video-hover-container a {
   position: relative;
