@@ -52,19 +52,33 @@
     </div>
   </nav>
 
-  <br>
+  <style>
+    @media (max-width: 767px) {
+      .about-img-col {
+        text-align: center !important;
+        justify-content: center !important;
+        margin-bottom: 1.5rem;
+      }
+      .about-text-col {
+        text-align: left;
+      }
+      .about-social-row {
+        justify-content: center !important;
+      }
+    }
+  </style>
 
   <div class='container'>
     <div class='row align-items-center' style='padding-top: 2rem;'>
-      <!-- Image column - 30% width, right-aligned to close gap -->
-      <div class='col-md-4 text-right d-flex align-items-center justify-content-end'>
+      <!-- Image column - centers on mobile -->
+      <div class='col-md-4 about-img-col text-md-right d-flex align-items-center justify-content-md-end justify-content-center'>
         <figure class='figure mb-0'>
           <img src='assets/img/me/prof-pic-small.jpg' class="figure-img img-fluid rounded mb-0" style="max-width: 200px;">
         </figure>
       </div>
 
-      <!-- Text column - 70% width -->
-      <div class='col-md-6 about-me' style='font-size: 1rem;'>
+      <!-- Text column -->
+      <div class='col-md-6 about-me about-text-col' style='font-size: 1rem;'>
         <p>
           I spent hours analyzing a single three-minute scene from Pulp Fiction for a film-analysis class in college.
           Wondering if machines could help with that kind of analysis is what pulled me into programming and ML in 2019.
@@ -80,14 +94,9 @@
           <a href="https://www.youtube.com/watch?v=NZNI0avIb3Y" target="_blank" rel="noopener noreferrer"><i>Normal</i></a>) 
             and composed the soundtrack for the former.
         </p>
-      </div>
-    </div>
 
-    <!-- Social links in separate row -->
-    <div class='row'>
-      <div class='col-md-4'></div>
-      <div class='col-md-6'>
-        <div class="social-links-panel" style="justify-content: flex-start; margin-top: 1rem;">
+        <!-- Social links moved inside text column for better mobile flow -->
+        <div class="social-links-panel about-social-row" style="justify-content: flex-start; margin-top: 1rem; padding: 0;">
           <a href='mailto:rsomani95@gmail.com' class="social-link" title="Email">
             <i class="fas fa-envelope"></i>
           </a>

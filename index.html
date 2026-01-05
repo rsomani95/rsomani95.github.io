@@ -29,14 +29,13 @@
       width: 100%;
       height: 100%;
       min-height: 250px;
-      background-color: #f8f9fa;
+      background-color: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #6c757d;
       font-weight: 500;
       border-radius: 4px;
-      border: 1px solid #dee2e6;
       overflow: hidden;
     }
     .placeholder-img img {
@@ -69,6 +68,32 @@
     /* Ensure Juxtapose fits container */
     .juxtapose {
         width: 100%;
+    }
+    
+    /* Mobile-specific styles */
+    @media (max-width: 767px) {
+      .hero-section {
+        padding: 3rem 0 2rem;
+      }
+      .hero-section p.lead,
+      .hero-section ul {
+        padding-left: 0 !important;
+      }
+      .project-row {
+        margin-bottom: 3rem;
+      }
+      .placeholder-img {
+        min-height: auto;
+      }
+      .project-row .col-md-5 {
+        padding-top: 1rem;
+      }
+      .project-row h3 {
+        font-size: 1.4rem;
+      }
+      .project-row p {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
