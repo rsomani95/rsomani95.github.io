@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
+  <link rel='stylesheet' href='css/main.css'>
+  <link rel='stylesheet' href='css/bootstrap-toc.css'>
+  <link rel='stylesheet' href='css/links.css'>
+  <link rel='stylesheet' href='css/hover-effects.css'>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <title>Shot Type Classification | Rahul Somani</title>
+  <style>
+    .juxtapose-wrapper {
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .jx-knightlab {
+      opacity: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Work</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="project-header">
+    <h1>Shot Type Classification</h1>
+    <div class="subtitle">Independent Research - 2019</div>
+  </div>
+
+  <div class="container" style="max-width: 1000px; margin: 0 auto 3rem; padding: 0 15px;">
+    <div class="row align-items-center">
+      <div class="col-md-7 mb-4 mb-md-0">
+        <div class="juxtapose-wrapper">
+          <div class="juxtapose">
+            <img src="assets/img/cover/cover-after-revised-ds.jpg" />
+            <img src="assets/img/cover/cover-before-ds.jpg" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <p style="line-height: 1.6; margin-bottom: 1rem; font-size: 1rem; margin-top: 1rem;">
+          An introduction to the visual language of cinema: what it is and why it matters,
+          and how neural networks can can be used to analyse one specific aspect of this language:
+          <b>shot framing</b>
+        </p>
+
+        <p style="margin-top: 1.5rem;">
+            Read the full technical write-up with detailed methodology, dataset breakdown, and results
+            in the <a href="ai-film-1.html" class="external-link">comprehensive blog post</a>.
+          </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <hr>
+    <h4>Abstract</h4>
+    <p>
+      Analysing cinema is a time-consuming process. In the cinematography domain alone, there's
+      a lot of factors to consider, such as shot scale, shot composition, camera movement, color, 
+      lighting, etc. Whatever you shoot is in some way influenced by what you've watched. There's 
+      only so much one can watch, and even lesser that one can analyse thoroughly.
+    </p>
+
+    <p>
+      This is where neural networks offer ample promise. They can recognise patterns in images 
+      that weren't possible until less than a decade ago, thus offering an unimaginable speed up 
+      in analysing cinema. I've developed a neural network that focuses on one fundamental element 
+      of visual grammar: <b>shot types</b>. It's capable of recognising 6 unique shot types, and is 
+      <i>~91% accurate</i>.
+    </p>
+    <br>
+    <hr>
+  </div>
+
+  <div class="container" style="max-width: 1000px;">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <img src="assets/img/valid/ecu/fight-club_01-narrator.png_cropped.jpg" class="img-fluid rounded" alt="Extreme Close-Up example">
+        <p class="text-center text-muted mt-2" style="font-size: 0.85rem;">Extreme Close-Up</p>
+      </div>
+      <div class="col-md-4 mb-3">
+        <img src="assets/img/valid/cu/catch-me-if-you-can_2224.jpg_cropped.jpg" class="img-fluid rounded" alt="Close-Up example">
+        <p class="text-center text-muted mt-2" style="font-size: 0.85rem;">Close-Up</p>
+      </div>
+      <div class="col-md-4 mb-3">
+        <img src="assets/img/valid/mcu/taxi-driver_53-mohawk.png_cropped.jpg" class="img-fluid rounded" alt="Medium Close-Up example">
+        <p class="text-center text-muted mt-2" style="font-size: 0.85rem;">Medium Close-Up</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <img src="assets/img/valid/ms/taxi-driver_35-device.png_cropped.jpg" class="img-fluid rounded" alt="Medium Shot example">
+        <p class="text-center text-muted mt-2" style="font-size: 0.85rem;">Medium Shot</p>
+      </div>
+      <div class="col-md-4 mb-3">
+        <img src="assets/img/valid/ls/gangs-of-new-york_3095.jpg_cropped.jpg" class="img-fluid rounded" alt="Long Shot example">
+        <p class="text-center text-muted mt-2" style="font-size: 0.85rem;">Long Shot</p>
+      </div>
+      <div class="col-md-4 mb-3">
+        <img src="assets/img/valid/ews/boyhood_6310.jpg_cropped.jpg" class="img-fluid rounded" alt="Extreme Wide Shot example">
+        <p class="text-center text-muted mt-2" style="font-size: 0.85rem;">Extreme Wide Shot</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Social Links Footer -->
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="social-links-panel">
+          <a href='mailto:rsomani95@gmail.com' class="social-link" title="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href='https://github.com/rsomani95/' class="social-link" title="GitHub" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href='https://twitter.com/rsomani95' class="social-link" title="Twitter" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href='https://www.linkedin.com/in/rsomani95/' class="social-link" title="LinkedIn" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.knightlab.com/libs/juxtapose/latest/js/juxtapose.min.js"></script>
+  <script src="js/hover-effects.js"></script>
+
+</body>
+
+</html>
+
