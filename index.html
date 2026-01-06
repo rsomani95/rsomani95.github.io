@@ -73,14 +73,20 @@
     /* Mobile-specific styles */
     @media (max-width: 767px) {
       .hero-section {
-        padding: 3rem 0 2rem;
+        padding: 3rem 1rem 2rem; /* Add horizontal padding directly */
       }
       .hero-section p.lead,
       .hero-section ul {
         padding-left: 0 !important;
+        margin-left: 0;
       }
       .project-row {
         margin-bottom: 3rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      .project-row:last-child {
+        border-bottom: none;
       }
       .placeholder-img {
         min-height: auto;

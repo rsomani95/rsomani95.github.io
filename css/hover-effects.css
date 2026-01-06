@@ -138,6 +138,20 @@
   border-radius: 4px;
 }
 
+/* Mobile autoplay states */
+.video-hover-container.mobile-playing .video-hover-static {
+  opacity: 0 !important;
+}
+.video-hover-container.mobile-playing .video-hover-animated {
+  opacity: 1 !important;
+}
+.gif-hover-container.mobile-playing .gif-hover-static {
+  opacity: 0 !important;
+}
+.gif-hover-container.mobile-playing .gif-hover-animated {
+  opacity: 1 !important;
+}
+
 /* Mobile optimizations for hover effects */
 @media (max-width: 767px) {
   .video-hover-container,
